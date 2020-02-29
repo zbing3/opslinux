@@ -2,8 +2,8 @@
 title: "Blog更新到hugo"
 date: 2020-02-29 15:04:07
 draft: false
-tags: [blog, hugo]
-categories: [blog, hugo]
+tags: [blog, Hugo, Hexo]
+categories: [blog, Hugo, Hexo]
 ---
 
 其实好久没有更新博客了，但是这段时间并没有放弃和总结一些东西，只不过都是草草了事，也没做总结，不方便拿出来分享。一直在创业和输出的阶段，时间上确实也紧了一些。最近由于疫情的关系一直在休息，恰巧想起自己的 blog，闲来无事折腾一番，把 hexo 替换成了 hugo。如下是替换过程，一个是作为记录，一个是方便有缘人吧。
@@ -175,7 +175,8 @@ git push origin gh-pages
 > 准备之后还要改下脚本，在进行 deploy 部署的时候，把博客程序自动备份到 master 上。
 
 # 参考
-https://blindwith.science/2019/08/447.html/
-https://scarletsky.github.io/2019/05/02/migrate-hexo-to-hugo/
-https://zhuanlan.zhihu.com/p/37752930
-https://rileyng.github.io/post/hugo-utter/
+
+* [https://blindwith.science/2019/08/447.html/](https://blindwith.science/2019/08/447.html/)
+* https://scarletsky.github.io/2019/05/02/migrate-hexo-to-hugo/
+* https://zhuanlan.zhihu.com/p/37752930
+* https://rileyng.github.io/post/hugo-utter/
