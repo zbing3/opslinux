@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/mysql/</link>
+    <description>Recent content in mysql on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 20 Nov 2014 17:11:04 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django使用两个以上mysql数据库</title>
+      <link>http://opslinux.com/2014/11/20/Django%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 20 Nov 2014 17:11:04 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/11/20/Django%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>看了Django的官方文档，关于model这有介绍Multiple databases，但是没有介绍超过两个数据库的连接情况，这里我用mysq</description>
+    </item>
+    
+  </channel>
+</rss>

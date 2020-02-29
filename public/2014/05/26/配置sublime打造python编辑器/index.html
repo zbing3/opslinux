@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>配置sublime打造python编辑器 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="Contents 插件 Package Control SublimeCodeIntel插件 SublimeLinter Python PEP8 Autoformat GitGutter SideBarEnhancements 快捷键 昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2014/05/26/%E9%85%8D%E7%BD%AEsublime%E6%89%93%E9%80%A0python%E7%BC%96%E8%BE%91%E5%99%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="配置sublime打造python编辑器" />
+<meta property="og:description" content="Contents 插件 Package Control SublimeCodeIntel插件 SublimeLinter Python PEP8 Autoformat GitGutter SideBarEnhancements 快捷键 昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2014/05/26/%E9%85%8D%E7%BD%AEsublime%E6%89%93%E9%80%A0python%E7%BC%96%E8%BE%91%E5%99%A8/" />
+<meta property="article:published_time" content="2014-05-26T09:46:24+00:00" />
+<meta property="article:modified_time" content="2014-05-26T09:46:24+00:00" />
+<meta itemprop="name" content="配置sublime打造python编辑器">
+<meta itemprop="description" content="Contents 插件 Package Control SublimeCodeIntel插件 SublimeLinter Python PEP8 Autoformat GitGutter SideBarEnhancements 快捷键 昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速">
+<meta itemprop="datePublished" content="2014-05-26T09:46:24&#43;00:00" />
+<meta itemprop="dateModified" content="2014-05-26T09:46:24&#43;00:00" />
+<meta itemprop="wordCount" content="1202">
+
+
+
+<meta itemprop="keywords" content="sublime,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="配置sublime打造python编辑器"/>
+<meta name="twitter:description" content="Contents 插件 Package Control SublimeCodeIntel插件 SublimeLinter Python PEP8 Autoformat GitGutter SideBarEnhancements 快捷键 昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">配置sublime打造python编辑器</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2014-05-26 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#id3">插件</a>
+      <ul>
+        <li><a href="#package-controlid4">Package Control</a></li>
+        <li><a href="#sublimecodeintelid5">SublimeCodeIntel插件</a></li>
+        <li><a href="#sublimelinterid6">SublimeLinter</a></li>
+        <li><a href="#python-pep8-autoformatid7">Python PEP8 Autoformat</a></li>
+        <li><a href="#gitgutterid8">GitGutter</a></li>
+        <li><a href="#sidebarenhancementsid9">SideBarEnhancements</a></li>
+      </ul>
+    </li>
+    <li><a href="#id10">快捷键</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Contents</p>
+<ul>
+<li>
+<p><a href="#id1">插件</a></p>
+<ul>
+<li><a href="#package-control">Package Control</a></li>
+<li><a href="#sublimecodeintel">SublimeCodeIntel插件</a></li>
+<li><a href="#sublimelinter">SublimeLinter</a></li>
+<li><a href="#python-pep8-autoformat">Python PEP8 Autoformat</a></li>
+<li><a href="#gitgutter">GitGutter</a></li>
+<li><a href="#sidebarenhancements">SideBarEnhancements</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#id2">快捷键</a></p>
+</li>
+</ul>
+<p>昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速的学习下sublime的配置，来开发python，由于本人一直使用sublime开发python web项目，索性把自己的配置过程写下来，方便大家交流。</p>
+<hr>
+<p>首先，安装上sublime这个就不多说了，本人使用的是宿便sublime Text2 虽然出3了，但是有些插件还没有支持索性不用3。</p>
+<p>进入下面的配置文件：</p>
+<p>Preferences ——》Settings - Default</p>
+<p>找到对应的关键字，修改成下面的值，切忌：不是复制下面粘贴进去。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+     &#34;auto_indent&#34;: true,
+     &#34;drag_text&#34;: false,
+     &#34;font_face&#34;: &#34;&#34;,
+     &#34;font_size&#34;: 17.5,
+     &#34;ignored_packages&#34;:
+     [
+          &#34;Vintage&#34;
+     ],
+     &#34;tab_size&#34;: 4,
+     &#34;translate_tabs_to_spaces&#34;: true,
+     &#34;trim_automatic_white_space&#34;: true,
+     &#34;word_wrap&#34;: true
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="id3"><a href="#id3">插件</a></h2>
+<h3 id="package-controlid4"><a href="#id4">Package Control</a></h3>
+<p>包管理器是必备的，新下载的Sublime Text第一个装的肯定是这个，有了它，装其他的包就很方便了。</p>
+<p>适用于 Sublime Text 3：</p>
+<p>1、通过快捷键 `ctrl+`` 或者 View -&gt; Show Console 菜单打开控制台</p>
+<p>2、粘贴对应版本的代码后回车安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import  urllib.request,os;pf=&#39;Package Control.sublime-package&#39;;ipp=sublime.installed_packages_path();urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler()));open(os.path.join(ipp,pf),&#39;wb&#39;).write(urllib.request.urlopen(&#39;http://sublime.wbond.net/&#39;+pf.replace(&#39; &#39;,&#39;%20&#39;)).read())
+</code></pre></td></tr></table>
+</div>
+</div><p>适用于 Sublime Text 2：
+安装方式有两种，第一种是在线下载安装：在 Sublime Text 2 中按下 &quot;ctrl+`&quot;（就是大键盘数字1左边的那个键），拷贝以下命令到窗口下部的终端中，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import urllib2,os; pf=&#39;Package Control.sublime-package&#39;; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),&#39;wb&#39;).write(urllib2.urlopen(&#39;http://sublime.wbond.net/&#39;+pf.replace(&#39; &#39;,&#39;%20&#39;)).read()); print &#39;Please restart Sublime Text to finish installation&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>然后回车确认，安装完毕之后重启sublime，如果发现在Perferences中看到package control这一项，则安装成功。</p>
+<p>然后就可以通过&quot;command+Shift+P&quot;打开命令面板，输入&quot;install&quot;命令，选择“Package Control: Install Package”，然后输入要安装的包的名称，就可以在线安装了。</p>
+<h3 id="sublimecodeintelid5"><a href="#id5">SublimeCodeIntel插件</a></h3>
+<p>智能提示插件，这个插件的智能提示功能非常强大，可以自定义提示的内容库</p>
+<p>Preferences ——》Package Settings ——》SublimeCodeIntel ——》Settings - Default</p>
+<p>修改里面python的配置，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&#34;codeintel_config&#34;: {
+    &#34;Python&#34;: {
+            &#34;PATH&#34;: &#34;usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH&#34;,
+            &#34;pythonExtraPaths&#34;: [&#34;/usr/local/lib/python2.7/site-packages&#34;],
+            &#34;python&#34;:&#34;/usr/bin/python2.7&#34;,
+            &#34;PYTHONPATH&#34;: &#34;/usr/local/lib/python2.7/site-packages:/System/Library/Frameworks/Python.framework/Versions/2.7/:/Users/ce/workspace:$PYTHONPATH&#34;
+    },
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>安装pep8和pylint 实现代码风格和错误检查</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo pip install pylint
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo pip install pep8
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sublimelinterid6"><a href="#id6">SublimeLinter</a></h3>
+<p>这是用来在写代码时做代码检查的。可以在包管理器中安装。写Python程序的话，它还会帮你查代码是否符合PEP8的要求。有问题有代码会出现白框，点击时底下的状态栏会提示出什么问题。</p>
+<h3 id="python-pep8-autoformatid7"><a href="#id7">Python PEP8 Autoformat</a></h3>
+<p>这是用来按PEP8自动格式化代码的。可以在包管理器中安装。如果以前写程序不留意的话，用SublimeLinter一查，满屏都是白框框，只要装上这个包，按ctrl+shift+r，代码就会按PEP8要求自动格式化了，一屏的白框几乎都消失了</p>
+<h3 id="gitgutterid8"><a href="#id8">GitGutter</a></h3>
+<p>它基于git查看代码行是被增加，修改还是删除，在行数的前面显示如下：</p>
+<p><img src="http://opslinux.qiniudn.com/b4d952ccb1_183250-7WIb-865233.png" alt="GitGutter"></p>
+<h3 id="sidebarenhancementsid9"><a href="#id9">SideBarEnhancements</a></h3>
+<p>可以大大加强在侧栏目录树中右键的选项</p>
+<h2 id="id10"><a href="#id10">快捷键</a></h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">command + p            //快速查找特定文件
+command + shift + f   //多文件搜素
+command + r          //查看文件内块列表（如果是类文件，展示的是函数）
+command + alt + num //多屏查看文件
+command + k + b    //切换左侧目录面板
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2014-05-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/sublime/">sublime</a>
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2014/05/27/Django%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%BE%E7%A4%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Django错误日志在命令行显示</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2014/05/25/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%B8%80/">
+            <span class="next-text nav-default">python开发实践(一)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

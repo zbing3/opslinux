@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kafka on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/kafka/</link>
+    <description>Recent content in kafka on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 14 Jul 2015 09:56:03 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python连接kafka</title>
+      <link>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</link>
+      <pubDate>Tue, 14 Jul 2015 09:56:03 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</guid>
+      <description>最近项目中总是跟java配合，我一个写python的程序员，面对有复杂数据结构的java代码转换成python代码，确实是一大难题，有时候或</description>
+    </item>
+    
+  </channel>
+</rss>

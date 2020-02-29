@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/nginx/</link>
+    <description>Recent content in nginx on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 24 Jan 2014 17:24:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx打造3w高并发网站</title>
+      <link>http://opslinux.com/2014/01/24/Nginx%E6%89%93%E9%80%A03w%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%AB%99/</link>
+      <pubDate>Fri, 24 Jan 2014 17:24:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/01/24/Nginx%E6%89%93%E9%80%A03w%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%AB%99/</guid>
+      <description>Nginx是俄罗斯人编写的十分轻量级的HTTP服务器,Nginx，它的发音为“engine X”，是一个高性能的HTTP和反向代理服务器，同时</description>
+    </item>
+    
+  </channel>
+</rss>

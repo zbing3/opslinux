@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>0.搭建环境 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="操作系统：mac OSX 10.12 或 centos 7 编辑器： vim、 sublime、atom 要求会翻墙 准备工具 centos： http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso virtualbox： https://www.virtualbox.org/wiki/Downloads sublime：" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2016/11/18/0-%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="0.搭建环境" />
+<meta property="og:description" content="操作系统：mac OSX 10.12 或 centos 7 编辑器： vim、 sublime、atom 要求会翻墙 准备工具 centos： http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso virtualbox： https://www.virtualbox.org/wiki/Downloads sublime：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2016/11/18/0-%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/" />
+<meta property="article:published_time" content="2016-11-18T22:22:05+00:00" />
+<meta property="article:modified_time" content="2016-11-18T22:22:05+00:00" />
+<meta itemprop="name" content="0.搭建环境">
+<meta itemprop="description" content="操作系统：mac OSX 10.12 或 centos 7 编辑器： vim、 sublime、atom 要求会翻墙 准备工具 centos： http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso virtualbox： https://www.virtualbox.org/wiki/Downloads sublime：">
+<meta itemprop="datePublished" content="2016-11-18T22:22:05&#43;00:00" />
+<meta itemprop="dateModified" content="2016-11-18T22:22:05&#43;00:00" />
+<meta itemprop="wordCount" content="988">
+
+
+
+<meta itemprop="keywords" content="python教程," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="0.搭建环境"/>
+<meta name="twitter:description" content="操作系统：mac OSX 10.12 或 centos 7 编辑器： vim、 sublime、atom 要求会翻墙 准备工具 centos： http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso virtualbox： https://www.virtualbox.org/wiki/Downloads sublime："/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">0.搭建环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-11-18 </span>
+        <div class="post-category">
+            <a href="/categories/python%E6%95%99%E7%A8%8B/"> python教程 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading-2">虚拟机</a>
+      <ul>
+        <li><a href="#virtualbox">virtualbox</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading-3">安装工具</a>
+      <ul>
+        <li><a href="#1-pyenv">1. pyenv</a></li>
+        <li><a href="#2-virtualenvwrapper">2. virtualenvwrapper</a></li>
+        <li><a href="#bug">bug</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>操作系统：mac OSX 10.12 或 centos 7
+编辑器： vim、 sublime、atom
+要求会翻墙</p>
+<h1 id="heading">准备工具</h1>
+<p>centos：
+<a href="http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso">http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso</a></p>
+<p>virtualbox：
+<a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
+<p>sublime：
+<a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<p>SecureCRT:
+<a href="http://www.xdowns.com/soft/softdown.asp?softid=23625">http://www.xdowns.com/soft/softdown.asp?softid=23625</a></p>
+<h1 id="heading-1">操作系统</h1>
+<p>下载 Centos
+<a href="http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso">http://mirror.bit.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso</a></p>
+<h2 id="heading-2">虚拟机</h2>
+<p>如果不想直接安装Centos，建议使用虚拟机安装</p>
+<h3 id="virtualbox">virtualbox</h3>
+<p><a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>
+下载完后安装</p>
+<p>安装增强功能：</p>
+<p>在【设备】中选择安装【安装增强功能】，由于我们安装的是 minimal 最小化的centos，所以我们需要安装一些库来支持插件的安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">yum update # 更新软件
+yum -y install gcc kernel-devel kenel-headers make bzip2  # 安装依赖库
+reboot # 重启
+</code></pre></td></tr></table>
+</div>
+</div><p>挂载执行脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt  # 挂载光驱到 mnt 目录下
+cd /mnt                # 进入到mnt目录
+sh ./VBoxLinuxAdditions.run  # 执行脚本，进行安装
+</code></pre></td></tr></table>
+</div>
+</div><p>安装完成后使用 reboot 重启，就已经生效</p>
+<p>然后对现有的环境做一次快照，以便日后恢复。</p>
+<h1 id="python">python环境</h1>
+<p>版本： python3.5.2</p>
+<p>centos os 默认使用的是 Python 2.7.5 ， 我们需要使用 python3 走在时尚的最前沿，所以需要在系统中安装多个Python，但是又不能影响系统自带的 Python（比如yum 等等系统中好多程序是要依赖于系统本身的python的）。<a href="https://github.com/yyuu/pyenv">pyenv</a>就是一个Ptyhon版本管理工具</p>
+<h2 id="heading-3">安装工具</h2>
+<h3 id="1-pyenv">1. pyenv</h3>
+<h4 id="-pyenv">安装 pyenv</h4>
+<p><strong>linux:</strong></p>
+<p>centos 的配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ yum install readline readline-devel readline-static -y
+$ yum install openssl openssl-devel openssl-static -y
+$ yum install sqlite-devel -y
+$ yum install bzip2-devel bzip2-libs -y
+
+$ yum install patch vim git
+</code></pre></td></tr></table>
+</div>
+</div><p>给系统 python 安装 pip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ yum -y install epel-release  # 安装 epel 扩展源
+$ yum -y install python-pip
+$ yum clean all # 清除 cache
+</code></pre></td></tr></table>
+</div>
+</div><p>系统 python 安装 virtualenvwrapper (为了做pyenv切换多个虚拟环境做兼容)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pip install virtualenvwrapper
+$ vim ~/.bashrc
+export WORKON_HOME=$HOME/.virtualenvs 
+source /usr/local/bin/virtualenvwrapper.sh
+</code></pre></td></tr></table>
+</div>
+</div><p>pyenv 安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;&gt;&gt; ~/.bashrc # 指明环境变量
+$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;&gt;&gt; ~/.bashrc
+$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &gt;&gt; ~/.bashrc  # 开启shims and autocompletion
+$ exec $SHELL -l  # 重新启动shell让其生效 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>mac:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ brew update
+$ brew install pyenv //安装
+$ brew upgrade pyenv //升级
+$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;&gt;&gt; ~/.bash_profile # 指明环境变量
+$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;&gt;&gt; ~/.bash_profile
+$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &gt;&gt; ~/.bash_profile //只需要执行一次即可
+$ vim ~/.bash_profile
+if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+else
+    echo &#34;WARNING: Can&#39;t find virtualenvwrapper.sh&#34;
+fi
+</code></pre></td></tr></table>
+</div>
+</div><p>或者使用 <a href="https://github.com/yyuu/pyenv-installer">pyenv-installer</a> 脚本进行安装</p>
+<h4 id="heading-4">查看可安装的版本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pyenv install --list
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="heading-5">安装指定版本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pyenv install 3.5.2 -v
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="heading-6">更新数据库</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pyenv rehash
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="python-1">查看当前已安装的python版本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> $ pyenv versions 
+ * system (set by /Users/ce/workspace/.python-version)
+  3.5.2
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="python-2">设置全局的python版本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pyenv global 3.5.2
+$ pyenv versions
+system
+* 3.5.2 (set by /Users/ce/workspace/.python-version)
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-virtualenvwrapper">2. virtualenvwrapper</h3>
+<p><strong>linux</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pip install virtualenvwrapper
+$ git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/pyenv-virtualenvwrapper
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>mac</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pip install virtualenvwrapper
+$ brew install pyenv-virtualenvwrapper
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="python35">使用python3.5创建一个虚拟环境</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ mkvirtualenv env352 -p $(which python3.5) # 基于 python3 创建 env352虚拟环境
+$ workon env352 # 切换到 env352 环境 （开发时使用）
+$ pip install virtualenvwrapper # 为了兼容 pyenv 多虚拟环境
+$ pyenv global system # 默认全局的 python 可以切换到 系统的python
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bug">bug</h3>
+<p>有时候创建会出如下问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> $ mkvirtualenv env352 -p $(which python3.5)                                                                                                                                                                                                                    [12:45:34]
+Running virtualenv with interpreter /Users/ce/.pyenv/shims/python3.5
+pyenv: python3.5: command not found
+
+The `python3.5&#39; command exists in these Python versions:
+  3.5.1
+  3.5.2
+  3.5.2/envs/env352
+  env352
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pyenv shell 3.5.2
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2016-11-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2016/11/18/1-python%E5%9F%BA%E7%A1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">1.python基础</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2016/10/30/%E5%88%86%E6%9E%90go-redis%E5%BA%93%E6%BA%90%E7%A0%81/">
+            <span class="next-text nav-default">分析go-redis库源码</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

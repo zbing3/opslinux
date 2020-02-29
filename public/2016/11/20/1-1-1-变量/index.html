@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python 变量 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="在数学概念中，变量（Variable）表示没有固定值，可改变的数。但从计算机系统实现角度来看，变量是一段或多段用来存储数据的内存。 编程语言允" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2016/11/20/1-1-1-%E5%8F%98%E9%87%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python 变量" />
+<meta property="og:description" content="在数学概念中，变量（Variable）表示没有固定值，可改变的数。但从计算机系统实现角度来看，变量是一段或多段用来存储数据的内存。 编程语言允" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2016/11/20/1-1-1-%E5%8F%98%E9%87%8F/" />
+<meta property="article:published_time" content="2016-11-20T14:49:56+00:00" />
+<meta property="article:modified_time" content="2016-11-20T14:49:56+00:00" />
+<meta itemprop="name" content="python 变量">
+<meta itemprop="description" content="在数学概念中，变量（Variable）表示没有固定值，可改变的数。但从计算机系统实现角度来看，变量是一段或多段用来存储数据的内存。 编程语言允">
+<meta itemprop="datePublished" content="2016-11-20T14:49:56&#43;00:00" />
+<meta itemprop="dateModified" content="2016-11-20T14:49:56&#43;00:00" />
+<meta itemprop="wordCount" content="857">
+
+
+
+<meta itemprop="keywords" content="python教程," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python 变量"/>
+<meta name="twitter:description" content="在数学概念中，变量（Variable）表示没有固定值，可改变的数。但从计算机系统实现角度来看，变量是一段或多段用来存储数据的内存。 编程语言允"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python 变量</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-11-20 </span>
+        <div class="post-category">
+            <a href="/categories/python%E6%95%99%E7%A8%8B/"> python教程 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在数学概念中，变量（Variable）表示没有固定值，可改变的数。但从计算机系统实现角度来看，变量是一段或多段用来存储数据的内存。</p>
+<p>编程语言允许你定义变量(variable)。所谓变量就是在程序中为了方便地引用内存中的值而为它取的名称。在 Python 中，我们用 = 来给一个变量赋值。</p>
+<p>我们先来声明一个变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; a = 7
+&gt;&gt;&gt; print(a)
+7
+</code></pre></td></tr></table>
+</div>
+</div><p>Python 中的变量有一个非常重要的性质:它仅仅是一个名字。赋值操作并不会实际 复制值，它只是为数据对象取个相关的名字。名字是对对象的引用而不是对象本身。你可以把名字想象成贴在盒子上的标签
+<img src="/media/14795244080513.jpg" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">变量                         内存
+                    +-------------------+
+a   +------------&gt;  |        7          |
+                    +-------------------+             
+
+</code></pre></td></tr></table>
+</div>
+</div><p>在Python中使用变量时，需要遵守一些规则和指南。违反这些规则将引发错误，而指南旨在 让你编写的代码更容易阅读和理解。请务必牢记下述有关变量的规则。</p>
+<ul>
+<li>变量名只能包含字母、数字和下划线。变量名可以字母或下划线打头，但不能以数字打 头，例如，可将变量命名为message_1，但不能将其命名为1_message。</li>
+<li>变量名不能包含空格，但可使用下划线来分隔其中的单词。例如，变量名greeting_message 可行，但变量名greeting message会引发错误。</li>
+<li>不要将Python关键字和函数名用作变量名，即不要使用Python保留用于特殊用途的单词</li>
+</ul>
+<p>Python 关键字</p>
+<p>下面的关键字都有特殊含义，如果你将它们用作变量名，将引发错误:</p>
+<p><img src="/media/14795582273659.jpg" alt=""></p>
+<p>Python 内置函数</p>
+<p>将内置函数名用作变量名时，不会导致错误，但将覆盖这些函数的行为:
+<img src="/media/14795582489326.jpg" alt="">
+注意 在Python2.7中，print是关键字而不是函数。另外，Python3没有内置函数unicode()。这 两个单词都不应用作变量名。</p>
+<ul>
+<li>变量名应既简短又具有描述性。例如，name比n好，student_name比s_n好，name_length 比length_of_persons_name好。</li>
+<li>慎用小写字母l和大写字母O，因为它们可能被人错看成数字1和0。 要创建良好的变量名，需要经过一定的实践，在程序复杂而有趣时尤其如此。随着你编写的程序越来越多，并开始阅读别人编写的代码，将越来越善于创建有意义的变量名。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2016-11-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">python开发环境</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2016/11/20/1-1-2-%E5%88%97%E8%A1%A8/">
+            <span class="next-text nav-default">python 列表</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

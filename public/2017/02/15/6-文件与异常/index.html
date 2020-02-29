@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python 文件与异常 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="文件 数据持久化最简单的类型是普通文件，有时也叫平面文件（flat file）。它仅仅是在一个文件名下的字节流，把数据从一个文件读入内存，然后从" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2017/02/15/6-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python 文件与异常" />
+<meta property="og:description" content="文件 数据持久化最简单的类型是普通文件，有时也叫平面文件（flat file）。它仅仅是在一个文件名下的字节流，把数据从一个文件读入内存，然后从" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2017/02/15/6-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/" />
+<meta property="article:published_time" content="2017-02-15T10:50:36+00:00" />
+<meta property="article:modified_time" content="2017-02-15T10:50:36+00:00" />
+<meta itemprop="name" content="python 文件与异常">
+<meta itemprop="description" content="文件 数据持久化最简单的类型是普通文件，有时也叫平面文件（flat file）。它仅仅是在一个文件名下的字节流，把数据从一个文件读入内存，然后从">
+<meta itemprop="datePublished" content="2017-02-15T10:50:36&#43;00:00" />
+<meta itemprop="dateModified" content="2017-02-15T10:50:36&#43;00:00" />
+<meta itemprop="wordCount" content="6142">
+
+
+
+<meta itemprop="keywords" content="python教程," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python 文件与异常"/>
+<meta name="twitter:description" content="文件 数据持久化最简单的类型是普通文件，有时也叫平面文件（flat file）。它仅仅是在一个文件名下的字节流，把数据从一个文件读入内存，然后从"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python 文件与异常</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-02-15 </span>
+        <div class="post-category">
+            <a href="/categories/python%E6%95%99%E7%A8%8B/"> python教程 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">文件</a>
+      <ul>
+        <li><a href="#-write-">使用 write() 写文本文件</a></li>
+        <li><a href="#-readreadline--readlines-">使用 read()、readline() 或者 readlines() 读取文本文件</a></li>
+        <li><a href="#-write--1">使用 write() 写二进制文件</a></li>
+        <li><a href="#-read-">使用 read() 读取二进制文件</a></li>
+        <li><a href="#-with-">使用 with 自动关闭文件</a></li>
+        <li><a href="#-seek-">使用 seek() 改变位置</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading-1">异常</a>
+      <ul>
+        <li><a href="#-try-except-">使用 try-except 代码块</a></li>
+        <li><a href="#heading-2">使用异常避免崩溃</a></li>
+        <li><a href="#else-">else 代码块</a></li>
+        <li><a href="#heading-3">失败时不提示</a></li>
+        <li><a href="#heading-4">决定报告那些错误</a></li>
+        <li><a href="#finally">finally子句</a></li>
+        <li><a href="#heading-5">常见的异常</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="heading">文件</h2>
+<p>数据持久化最简单的类型是普通文件，有时也叫平面文件（flat file）。它仅仅是在一个文件名下的字节流，把数据从一个文件读入内存，然后从内存写入文件。Python很容易实现这些文件操作，它模仿熟悉和流行的 unix 系统的操作。</p>
+<p>读写一个文件之前需要打开它：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是对该 open() 调用的简单解释：</p>
+<ul>
+<li>data 是 open() 返回的文件对象；</li>
+<li>filename 是该文件的字符串名；</li>
+<li>mode 是指明文件类型和操作的字符串。</li>
+</ul>
+<p>mode 的第一个字母表明对其的操作。</p>
+<ul>
+<li>r  以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</li>
+<li>r+ 可读可写，不会创建不存在的文件。如果直接写文件，则从顶部开始写，覆盖之前此位置的内容，如果先读后写，则会在文件最后追加内容。</li>
+<li>w  表示写模式。若果文件不存在则新创建，如果该文件已存在则将其覆盖。</li>
+<li>w+ 打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</li>
+<li>x  表示在文件不存在的情况下新创建并写文件。</li>
+<li>a  打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</li>
+<li>a+ 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</li>
+</ul>
+<p>mode 的第二个字母是文件类型：</p>
+<ul>
+<li>t（或者省略） 代表文本类型。</li>
+<li>b 代表二进制文件。</li>
+</ul>
+<p>打开文件之后就可以调用函数来读写数据，最后需要关闭文件。</p>
+<h3 id="-write-">使用 write() 写文本文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; poem = &#34;日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。&#34;
+&gt;&gt;&gt; len(poem)
+32
+</code></pre></td></tr></table>
+</div>
+</div><p>将整首诗写到libai.txt中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; fout = open(&#39;libai.txt&#39;, &#39;wt&#39;)
+&gt;&gt;&gt; fout.write(poem)
+32
+fout.close()
+</code></pre></td></tr></table>
+</div>
+</div><p>函数 write() 返回写入文件的字节数。和 print() 一样， 他没有增加空格或者换行符。同样，你也可以在一个文本文件中使用 print()</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; fout = open(&#39;libai.txt&#39;, &#39;w&#39;)
+&gt;&gt;&gt; print(poem, file=fout)
+&gt;&gt;&gt; fout.close()
+</code></pre></td></tr></table>
+</div>
+</div><p>这就产生了一个问题：到底是用是 write() 还是 print()？ print() 默认会在每个参数后面添加空格，在每行结束处添加换行。在之前的例子中， libai.txt 中默认添加了一个换行。为了使 print() 与 write() 有同样的输出，传入下面两个参数：</p>
+<ul>
+<li>sep 分隔符：默认是一个空格 ' '</li>
+<li>end 结束字符：默认是一个换行符 &lsquo;\n&rsquo;</li>
+</ul>
+<p>除非自定义参数，否则 print() 会使用默认参数。在这里，我们通过空字符串替换 print() 添加的所有多余输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">w</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">poem</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">fout</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果字符串非常大，可以将数据分块，直到所有字符被写入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">w</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">poem</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">size</span>
+<span class="mi">32</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">chunk</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">if</span> <span class="n">offset</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>         <span class="k">break</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">poem</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="n">chunk</span><span class="p">]</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">offset</span> <span class="o">+</span><span class="o">=</span> <span class="n">chunk</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>第一次写 10 个字符，4次写完，32个字符。</p>
+<p>如果 libai.txt 文件已经存在，使用模式 x 可以避免重写文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">font</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">xt</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span><span class="p">:</span>
+  <span class="n">File</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">&lt;ipython-input-108-c2dbf65c7612&gt;</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">xt</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">FileExistsError</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">17</span><span class="p">]</span> <span class="n">File</span> <span class="n">exists</span><span class="p">:</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-readreadline--readlines-">使用 read()、readline() 或者 readlines() 读取文本文件</h3>
+<p>你可以按照下面的示例那样，使用不带参数的 read() 函数一次读入文件的所有内容。但在读入文件时要格外注意，1GB的文件会用到相同大小的内存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rt</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">poem</span><span class="p">)</span>
+<span class="mi">32</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同样也可以设置最大的读入字符数限制 read() 函数一次返回的大小。下面一次读入10个字符，然后把每一快拼接成原来的字符串 poem</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rt</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">chunk</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">fragment</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">fragment</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>         <span class="k">break</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">poem</span> <span class="o">+</span><span class="o">=</span> <span class="n">fragment</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">poem</span><span class="p">)</span>
+<span class="mi">32</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>读到结尾之后，再次调用 read() 会返回空字符串('')， if not fragment 条件被判断为 False。此时会跳出 while True 的循环。 当然， 你也能使用 readline() 每次读入文件的一行。 在下面的例子中，通过追加每一行拼接成原来的字符串 poem:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rt</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">line</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">(</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>         <span class="k">break</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">poem</span> <span class="o">+</span><span class="o">=</span> <span class="n">line</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">poem</span><span class="p">)</span>
+<span class="mi">32</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">poem</span>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对于一个文本文件，即使空行也有1字符长度（换行符&rsquo;\n&rsquo;），自然会返回 True。当文件读取结束后，readline() （类似 read() ） 同样会返回空字符串，也被 while True 判断为 False。</p>
+<p>读取文本文件最简单的方式是使用一个迭代器（iterator），它会每次返回一行。这和之前的例子类似，但代码会更短：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; poem = &#39;&#39;
+&gt;&gt;&gt; fin = open(&#39;libai.txt&#39;, &#39;rt&#39;)
+&gt;&gt;&gt; for line in fin:
+...     poem += line
+...
+&gt;&gt;&gt; fin.close()
+&gt;&gt;&gt; len(poem)
+32
+&gt;&gt;&gt; poem
+&#39;日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>前面所有的示例最终都返回单个字符串 poem。 函数 readlines() 调用时每次读取一行，并返回单行字符串的列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; poem = &#39;&#39;&#39;日照香炉生紫烟,
+... 遥看瀑布挂前川。
+... 飞流直下三千尺，
+... 疑是银河落九天。
+... &#39;&#39;&#39;
+&gt;&gt;&gt; fin = open(&#39;libai.txt&#39;, &#39;wt&#39;)
+&gt;&gt;&gt; fin.write(poem)
+36
+&gt;&gt;&gt; fin.close()
+
+&gt;&gt;&gt; fin = open(&#39;libai.txt&#39;, &#39;rt&#39;)
+&gt;&gt;&gt; lines = fin.readlines()
+&gt;&gt;&gt; fin.close()
+&gt;&gt;&gt; lines
+[&#39;日照香炉生紫烟,\n&#39;, &#39;遥看瀑布挂前川。\n&#39;, &#39;飞流直下三千尺，\n&#39;, &#39;疑是银河落九天。\n&#39;]
+&gt;&gt;&gt; print(len(lines), &#39;lines read&#39;)
+4 lines read
+&gt;&gt;&gt; for line in lines:
+...     print(line, end=&#39;&#39;)
+...
+日照香炉生紫烟,
+遥看瀑布挂前川。
+飞流直下三千尺，
+疑是银河落九天。
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-write--1">使用 write() 写二进制文件</h3>
+<p>如果文件模式字符串中包含 &lsquo;b&rsquo;, 那么文件会以二进制模式打开，这种情况下，读写的是字节而不是字符串。</p>
+<p>我们手边没有二进制格式的诗，所以直接在 0~255 产生 256 字节的值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bdata</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="mi">256</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以二进制模式打开文件，并且一次写入所有的数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">wb</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="mi">256</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再次，write() 返回到写入的字节数。</p>
+<p>对于文本，也可以分块写二进制数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">wb</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">chunk</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">if</span> <span class="n">offset</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>         <span class="k">break</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bdata</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="n">chunk</span><span class="p">]</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="n">offset</span> <span class="o">+</span><span class="o">=</span> <span class="n">chunk</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="mi">100</span>
+<span class="mi">100</span>
+<span class="mi">56</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-read-">使用 read() 读取二进制文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rb</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bdata</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="mi">256</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-with-">使用 with 自动关闭文件</h3>
+<p>如果你忘记关闭已经打开的一个文件，在该文件对象不再被引用之后 Python 会关掉此文件。这也意味着在一个函数中打开文件，并没有及时关闭它，但是在函数结束时会被关掉。然而你可能会在一直运行中的函数或者程序的主要部分打开一个文件，应该强制剩下的所有写操作完成后再关闭文件。</p>
+<p>Python的上下文管理器（context manager）会清理一些资源，例如打开的文件。它的形式为 <code>with expression as variable</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">libai.txt</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">wt</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">poem</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>完成上下文管理器的代码后，文件会自动关闭。</p>
+<h3 id="-seek-">使用 seek() 改变位置</h3>
+<p>无论是读或者写文件，Python都会跟踪文件中的位置。函数 tell() 返回距离文件开始处的字节偏移量。函数 seek() 允许跳转到文件其他字节偏移量的位置。这意味着可以不用从头读取文件的没一个字节，直接跳转到最后位置并制度一个字节也是可行的。</p>
+<p>对于这个例子，使用之前写过的 256 字节的二进制文件 &lsquo;bfile&rsquo;:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rb</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">tell</span><span class="p">(</span><span class="p">)</span>
+<span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 seek() 读取文件结束前最后一个字节:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="mi">255</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一直读到文件结束:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bdata</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bdata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">255</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>seek() 同样返回当前的偏移量。</p>
+<p>用第二个参数调用函数 seek()： seek(offset, origin)</p>
+<ul>
+<li>如果 origin 等于0 （默认为0），从头偏移 offset 个字节；</li>
+<li>如果 origin 等于1，从当前位置处偏移 offset 个字节；</li>
+<li>如果 origin 等于2，距离最后结尾处偏移 offset 个字节。</li>
+</ul>
+<p>这些值也在标准库 os 模块中被定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_SET</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_CUR</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_END</span>
+<span class="mi">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以，我们可以用不通的方法读取最后一个字节：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rb</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>文件结尾前的一个字节：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">255</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">tell</span><span class="p">(</span><span class="p">)</span>
+<span class="mi">255</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一直读到文件结尾：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bddata</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdata</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">bdata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">255</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在调用 seek() 函数时不需要额外调用 tell()。前面的例子只是想说明两个函数都可以返回同样的偏移量。</p>
+</blockquote>
+<p>下面是从文件的当前位置寻找：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bfile</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">rb</span><span class="s1">&#39;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>接下来的例子返回最后两个字节：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">254</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mi">254</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">tell</span><span class="p">(</span><span class="p">)</span>
+<span class="mi">254</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在此基础上前进一个字节：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">255</span>
+<span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="n">fin</span><span class="o">.</span><span class="n">tell</span><span class="p">(</span><span class="p">)</span>
+<span class="mi">255</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这些函数对于二进制文件都是极其重要的。当文件是 ASCII 编码（每个字符一个字节）时，也可以使用它们，但是计算偏移量会是一个麻烦事。其实，这些都取决于文件的编码格式，最流行的编码格式（例如 UTF-8）每个字符的字节数都不尽相同。</p>
+<h2 id="heading-1">异常</h2>
+<p>Python使用被称为异常的特殊对象来管理程序执行期间发生的错误。每当发生让Python不知 所措的错误时，它都会创建一个异常对象。如果你编写了处理该异常的代码，程序将继续运行; 如果你未对异常进行处理，程序将停止，并显示一个traceback，其中包含有关异常的报告。
+异常是使用try-except代码块处理的。try-except代码块让Python执行指定的操作，同时告 诉Python发生异常时怎么办。使用了try-except代码块时，即便出现异常，程序也将继续运行: 显示你编写的友好的错误消息，而不是令用户迷惑的traceback。</p>
+<h3 id="-try-except-">使用 try-except 代码块</h3>
+<p>当你认为可能发生了错误时，可编写一个try-except代码来处理可能引发的异常。你让 Python尝试运行一些代码，并告诉它如果这些代码引发了指定的异常，该怎么办。</p>
+<p>try 语句有两种主要形式: try-except 和 try-finally . 这两个语句是互斥的, 也就是说你 只能使用其中的一种. 一个 try 语句可以对应一个或多个 except 子句, 但只能对应一个 finally 子句, 或是一个 try-except-finally 复合语句.</p>
+<p>处理ZeroDivisionError异常的try-except代码 类似于下面这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span><span class="o">&gt;</span> <span class="k">try</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">print</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">0</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>     <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">You can</span><span class="s2">&#39;</span><span class="s2">t divide by zero!</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="n">You</span> <span class="n">can</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">t divide by zero!</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们将导致错误的代码行print(5/0)放在了一个try代码中。如果try代码中的代码运行起来没有问题，Python将跳过except代码; 如果try代码中的代码导致了错误，Python将查找这样的except代码块，并运行其中的代码，即其中指定的错误与引发的错误相同。
+在这个示例中，try代码中的代码引发了ZeroDivisionError异常，因此Python指出了该如何解决问题的except代码块，并运行其中的代码。这样，用户看到的是一条 好的错误消息，而不是traceback:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">You can&#39;t divide by zero!
+</code></pre></td></tr></table>
+</div>
+</div><p>如果try-except代码后面还有其他代码，程序将接着运行，因为已经告诉了Python如何处理这种错误。</p>
+<h3 id="heading-2">使用异常避免崩溃</h3>
+<p>发生错误时，如果程序还有工作没有完成，妥善地处理错误就尤其重要。这种情况经常会出现在要求用户提供输入的程序中;如果程序能够妥善地处理无效输入，就能再提示用户提供有效输入，而不至于崩溃。</p>
+<p>下面来创建一个只执行除法运算的简单计算器:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"> <span class="mi">1</span> <span class="c1"># coding=utf-8</span>
+ <span class="mi">2</span> <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Give me two numbers, and I</span><span class="s2">&#39;</span><span class="s2">ll divide them.</span><span class="s2">&#34;</span><span class="p">)</span>
+ <span class="mi">3</span> <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Enter </span><span class="s2">&#39;</span><span class="s2">q</span><span class="s2">&#39;</span><span class="s2"> to quit.</span><span class="s2">&#34;</span><span class="p">)</span>
+ <span class="mi">4</span>
+ <span class="mi">5</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+ <span class="mi">6</span>     <span class="n">first_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">First number: </span><span class="s2">&#34;</span><span class="p">)</span>
+ <span class="mi">7</span>     <span class="k">if</span> <span class="n">first_number</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">q</span><span class="s1">&#39;</span><span class="p">:</span>
+ <span class="mi">8</span>         <span class="k">break</span>
+ <span class="mi">9</span>     <span class="n">second_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Second number: </span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="mi">10</span>     <span class="k">if</span> <span class="n">second_number</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">q</span><span class="s1">&#39;</span><span class="p">:</span>
+<span class="mi">11</span>         <span class="k">break</span>
+<span class="mi">12</span>     <span class="n">answer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">first_number</span><span class="p">)</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">second_number</span><span class="p">)</span>
+<span class="mi">13</span>     <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在第6行，这个程序提示用户输入一个数字，并将其存储到变量first_number中; 如果用户输入的不是表示退出的q，就再提示用户输入一个数字，并将其存储到变量second_number中(见第9行 )。 接下来，我们计算这两个数字的商 (即answer，见12行)。这个程序没有采取任何处理错误的措施，因此让它执行除数为0的除法运算时，它将崩溃:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Give me two numbers, and I&#39;ll divide them.
+Enter &#39;q&#39; to quit.
+
+First number: 5
+Second number: 0
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-208-1e61f850d337&gt;&#34;, line 11, in &lt;module&gt;
+    answer = int(first_number) / int(second_number)
+ZeroDivisionError: division by zero
+&gt;&gt;&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>程序崩溃可不好，但让用户看到 traceback 也不是好主意。不懂技术的用户会被它们搞糊涂， 而且如果用户 怀有恶意，他会通过traceback获悉你不希望他知道的信息。例如，他将知道你的程序文件的名称，还将看到部分不能正确运行的代码。有时候，训练有素的攻击者可根据这些信息判断出可对你的代码发起什么样的攻击。</p>
+<h3 id="else-">else 代码块</h3>
+<p>通过将可能引发错误的代码放在try-except代码中，可提高这个程序抵御错误的能力。错误是执行除法运算的代码行导致的，因此我们需要将它放到try-except代码块中。这个示例还包含一个else代码块; 依赖于try代码块成功执行的代码都应放到else代码中:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">  <span class="mi">1</span> <span class="c1"># coding=utf-8</span>
+  <span class="mi">2</span> <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Give me two numbers, and I</span><span class="s2">&#39;</span><span class="s2">ll divide them.</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="mi">3</span> <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Enter </span><span class="s2">&#39;</span><span class="s2">q</span><span class="s2">&#39;</span><span class="s2"> to quit.</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="mi">4</span>
+  <span class="mi">5</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="mi">6</span>     <span class="n">first_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">First number: </span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="mi">7</span>     <span class="k">if</span> <span class="n">first_number</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">q</span><span class="s1">&#39;</span><span class="p">:</span>
+  <span class="mi">8</span>         <span class="k">break</span>
+  <span class="mi">9</span>     <span class="n">second_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Second number: </span><span class="s2">&#34;</span><span class="p">)</span>
+ <span class="mi">10</span>     <span class="k">if</span> <span class="n">second_number</span> <span class="o">==</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">q</span><span class="s1">&#39;</span><span class="p">:</span>
+ <span class="mi">11</span>         <span class="k">break</span>
+ <span class="mi">12</span>     <span class="k">try</span><span class="p">:</span>
+ <span class="mi">13</span>         <span class="n">answer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">first_number</span><span class="p">)</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">second_number</span><span class="p">)</span>
+ <span class="mi">14</span>     <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+ <span class="mi">15</span>         <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">You can</span><span class="s2">&#39;</span><span class="s2">t divide by 0!</span><span class="s2">&#34;</span><span class="p">)</span>
+ <span class="mi">16</span>     <span class="k">else</span><span class="p">:</span>
+ <span class="mi">17</span>         <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们让Python尝试执行try代码块中的除法运算(见12行)，这个代码块只包含可能导致错误的代码。依赖于try代码块成功执行的代码都放在else代码中; 在这个示例中，如果除法运算成功，我们就使用else代码块来打印结果(见16行)。
+except代码块告诉Python，出现ZeroDivisionError异常时该怎么办(见14行 )。如果try代码因除零错误而失败，我们就打印一条友好的消息，告诉用户如何避免这种错误。程序将继续运行，用户根本看不到traceback:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Give me two numbers, and I&#39;ll divide them.
+Enter &#39;q&#39; to quit.
+
+First number: 5
+Second number: 0
+You can&#39;t divide by 0!
+
+First number: 5
+Second number: 2
+2.5
+
+First number: q
+&gt;&gt;&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>try-except-else代码块的工作原理大致如下: Python尝试执行try代码块中的代码; 只有可能引发异常的代码才需要放在try语句中。有时候，有一些仅在try代码块成功执行时才需要运行的的代码; 这些代码应放在else代码中。except代码块告诉Python，如果它尝试运行try代码块中的代码时引发了指定的异常，该怎么办。
+通过预测可能发生错误的代码，可编写健壮的程序，它们即便面临无效数据或缺少资源，也能继续运行，从而能够抵御无意的用户错误和恶意的攻击。</p>
+<h3 id="heading-3">失败时不提示</h3>
+<p>使用 pass</p>
+<h3 id="heading-4">决定报告那些错误</h3>
+<p>在什么情况下该向用户报告错误? 在什么情况下又应该在失败时不提示呢? 如果用户知道要分析哪些文件，他们可能希望在有文件没有分析时出现一条消息，将其中的原因告诉他们。 如果用户只想看到结果，而并不知道要分析哪些文件，可能就无需在有些文件不存在时告知他们。 向用户显示他不想看到的信息可能会降低程序的可用性。Python的错误处理结构让你能够细致地控制与用户分享错误信息的程度，要分享多少信息由你决定。</p>
+<p>编写得很好且经过详尽测试的代码不容易出现内部错误，如语法或逻辑错误，但只要程序依赖于外部因素，如用户输入、存在指定的文件、有网络连接，就有可能出现异常。凭借经验可判断该在程序的什么地方包含异常处理 ，以及出现错误时该向用户提供多少相关的信息。</p>
+<h3 id="finally">finally子句</h3>
+<p>finally 子句是无论异常是否发生,是否捕捉都会执行的一段代码. 你可以将 finally 仅仅配合 try 一起使用,也可以和 try-except(else 也是可选的)一起使用. 你可以用 finally 子句 与 try-except 或 try-except-else 一起使用.</p>
+<p>下面是 try-except-else-finally 语法的示例:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span> 
+    <span class="n">A</span>
+<span class="k">except</span> <span class="n">MyException1</span><span class="p">:</span>
+    <span class="n">B1</span>
+<span class="k">except</span> <span class="n">MyException2</span><span class="p">:</span>
+    <span class="n">B2</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="n">C</span>
+<span class="k">finally</span><span class="p">:</span> 
+    <span class="n">D</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然,无论如何,你都可以有不止一个的 except 子句,但最少有一个 except 语句,而 else 和 finally 都是可选的. A,B,C 和 D 是程序(代码块). 程序会按预期的顺序执行.(注意:可能的顺序是 A-C-D[正常]或 A-B-D[异常]).无论异常发生在 A,B,和/或 C 都将执行 finally 块.</p>
+<h3 id="heading-5">常见的异常</h3>
+<table>
+<thead>
+<tr>
+<th>异常</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AssertionError</td>
+<td>assert（断言）语句失败</td>
+</tr>
+<tr>
+<td>AttributeError</td>
+<td>试图访问一个对象没有的属性，比如foo.x ，但是foo没有x这个属性。</td>
+</tr>
+<tr>
+<td>IOError</td>
+<td>输入/输出异常，基本上是无法打开文件。</td>
+</tr>
+<tr>
+<td>ImportError</td>
+<td>无法引入模块或者包，基本上是路径问题</td>
+</tr>
+<tr>
+<td>IndentationError</td>
+<td>语法错误，代码没有正确对齐</td>
+</tr>
+<tr>
+<td>IndexError</td>
+<td>下标索引超出序列边界，比如当x只有三个元素，却试图访问x[5]</td>
+</tr>
+<tr>
+<td>KeyError<!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>试图访问字典里不存在的键</td>
+</tr>
+<tr>
+<td>KerboardInterrupt</td>
+<td>Ctrl + C 被按下</td>
+</tr>
+<tr>
+<td>NameError</td>
+<td>使用一个还未被赋值予对象的变量</td>
+</tr>
+<tr>
+<td>SyntaxError</td>
+<td>Python代码非法，代码不能解释</td>
+</tr>
+<tr>
+<td>TypeError</td>
+<td>传入对象类型与要求的不符</td>
+</tr>
+<tr>
+<td>UnboundLocalError</td>
+<td>试图访问一个还未被设置的局部变量，基本上是由于另一个同名的全局变量，导致你以为正在访问它</td>
+</tr>
+<tr>
+<td>ValueError</td>
+<td>传入一个调用者不期望的值，即使值的类型是正确的</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2017-02-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2017/02/25/5-%E7%B1%BB/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">python类讲解</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/">
+            <span class="next-text nav-default">python开发环境</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

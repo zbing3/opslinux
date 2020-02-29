@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sqlalchemy on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/sqlalchemy/</link>
+    <description>Recent content in sqlalchemy on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 19 Feb 2014 11:17:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/sqlalchemy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>sqlalchemy查询返回json数据</title>
+      <link>http://opslinux.com/2014/02/19/sqlalchemy%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9Ejson%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 19 Feb 2014 11:17:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/02/19/sqlalchemy%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9Ejson%E6%95%B0%E6%8D%AE/</guid>
+      <description>最近公司开发新项目使用tornado+mysql，传统的SQL开发方式大家都感觉不爽（其实我不太会，哈哈），所以开始使用orm方式，这也是p</description>
+    </item>
+    
+  </channel>
+</rss>

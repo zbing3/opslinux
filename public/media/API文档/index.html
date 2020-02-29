@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="[TOC]
+基本说明 params 为HTTP请求为GET时需要传的参数
+data 为HTTP请求为POST/PUT时需要传的参数
+headers 为HTTP请求设置的header值
+url_params 为URL中的参数
+域名 http://127.0.0.1/backstage
+1. 用户登陆相关 1.1登陆接口 post /login
+请求参数:
+1 2 3 4  data = { &amp;#34;uid&amp;#34;: &amp;#34;&amp;#34;, # 账号 &amp;#34;password&amp;#34;: &amp;#34;&amp;#34;, # 密码 }   返回结果:
+成功
+1 2 3 4  { &amp;#34;status&amp;#34;: 200, &amp;#34;msg&amp;#34;: &amp;#34;success&amp;#34; }   2.课程相关 get /lesson
+请求参数:
+1 2 3  data = { }   返回结果:
+成功
+1 2 3 4 5 6 7 8 9 10 11 12 13  { &amp;#34;data&amp;#34;: [ { &amp;#34;id&amp;#34;: 1, &amp;#34;name&amp;#34;: &amp;#34;计算机网络基础&amp;#34;, &amp;#34;description&amp;#34;: &amp;#34;计算机网络基础&amp;#34;, &amp;#34;cover_url&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;status&amp;#34;: 1 } ], &amp;#34;status&amp;#34;: 200, &amp;#34;msg&amp;#34;: &amp;#34;success&amp;#34; }   " /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/media/API%E6%96%87%E6%A1%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="[TOC]
+基本说明 params 为HTTP请求为GET时需要传的参数
+data 为HTTP请求为POST/PUT时需要传的参数
+headers 为HTTP请求设置的header值
+url_params 为URL中的参数
+域名 http://127.0.0.1/backstage
+1. 用户登陆相关 1.1登陆接口 post /login
+请求参数:
+1 2 3 4  data = { &#34;uid&#34;: &#34;&#34;, # 账号 &#34;password&#34;: &#34;&#34;, # 密码 }   返回结果:
+成功
+1 2 3 4  { &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   2.课程相关 get /lesson
+请求参数:
+1 2 3  data = { }   返回结果:
+成功
+1 2 3 4 5 6 7 8 9 10 11 12 13  { &#34;data&#34;: [ { &#34;id&#34;: 1, &#34;name&#34;: &#34;计算机网络基础&#34;, &#34;description&#34;: &#34;计算机网络基础&#34;, &#34;cover_url&#34;: &#34;&#34;, &#34;status&#34;: 1 } ], &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/media/API%E6%96%87%E6%A1%A3/" />
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="[TOC]
+基本说明 params 为HTTP请求为GET时需要传的参数
+data 为HTTP请求为POST/PUT时需要传的参数
+headers 为HTTP请求设置的header值
+url_params 为URL中的参数
+域名 http://127.0.0.1/backstage
+1. 用户登陆相关 1.1登陆接口 post /login
+请求参数:
+1 2 3 4  data = { &#34;uid&#34;: &#34;&#34;, # 账号 &#34;password&#34;: &#34;&#34;, # 密码 }   返回结果:
+成功
+1 2 3 4  { &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   2.课程相关 get /lesson
+请求参数:
+1 2 3  data = { }   返回结果:
+成功
+1 2 3 4 5 6 7 8 9 10 11 12 13  { &#34;data&#34;: [ { &#34;id&#34;: 1, &#34;name&#34;: &#34;计算机网络基础&#34;, &#34;description&#34;: &#34;计算机网络基础&#34;, &#34;cover_url&#34;: &#34;&#34;, &#34;status&#34;: 1 } ], &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   ">
+
+<meta itemprop="wordCount" content="93">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="[TOC]
+基本说明 params 为HTTP请求为GET时需要传的参数
+data 为HTTP请求为POST/PUT时需要传的参数
+headers 为HTTP请求设置的header值
+url_params 为URL中的参数
+域名 http://127.0.0.1/backstage
+1. 用户登陆相关 1.1登陆接口 post /login
+请求参数:
+1 2 3 4  data = { &#34;uid&#34;: &#34;&#34;, # 账号 &#34;password&#34;: &#34;&#34;, # 密码 }   返回结果:
+成功
+1 2 3 4  { &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   2.课程相关 get /lesson
+请求参数:
+1 2 3  data = { }   返回结果:
+成功
+1 2 3 4 5 6 7 8 9 10 11 12 13  { &#34;data&#34;: [ { &#34;id&#34;: 1, &#34;name&#34;: &#34;计算机网络基础&#34;, &#34;description&#34;: &#34;计算机网络基础&#34;, &#34;cover_url&#34;: &#34;&#34;, &#34;status&#34;: 1 } ], &#34;status&#34;: 200, &#34;msg&#34;: &#34;success&#34; }   "/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <p>[TOC]</p>
+<h1 id="heading">基本说明</h1>
+<p>params 为HTTP请求为GET时需要传的参数</p>
+<p>data 为HTTP请求为POST/PUT时需要传的参数</p>
+<p>headers 为HTTP请求设置的header值</p>
+<p>url_params 为URL中的参数</p>
+<h2 id="heading-1">域名</h2>
+<p>http://127.0.0.1/backstage</p>
+<h2 id="1-">1. 用户登陆相关</h2>
+<h3 id="11">1.1登陆接口</h3>
+<p><code>post /login</code></p>
+<p><strong>请求参数</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">uid</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#34;</span><span class="p">,</span>  <span class="c1"># 账号</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">password</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#34;</span><span class="p">,</span> <span class="c1"># 密码</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>返回结果</strong>:</p>
+<p>成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">status</span><span class="s2">&#34;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">msg</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">success</span><span class="s2">&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2">2.课程相关</h2>
+<p><code>get /lesson</code></p>
+<p><strong>请求参数</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>返回结果</strong>:</p>
+<p>成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">data</span><span class="s2">&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="sa"></span><span class="s2">&#34;</span><span class="s2">id</span><span class="s2">&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="sa"></span><span class="s2">&#34;</span><span class="s2">name</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">计算机网络基础</span><span class="s2">&#34;</span><span class="p">,</span>
+            <span class="sa"></span><span class="s2">&#34;</span><span class="s2">description</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">计算机网络基础</span><span class="s2">&#34;</span><span class="p">,</span>
+            <span class="sa"></span><span class="s2">&#34;</span><span class="s2">cover_url</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#34;</span><span class="p">,</span>
+            <span class="sa"></span><span class="s2">&#34;</span><span class="s2">status</span><span class="s2">&#34;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">]</span><span class="p">,</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">status</span><span class="s2">&#34;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="sa"></span><span class="s2">&#34;</span><span class="s2">msg</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">success</span><span class="s2">&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

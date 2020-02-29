@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/HTTP/</link>
+    <description>Recent content in HTTP on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 24 Jan 2014 15:33:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/HTTP/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTTP Header 详解</title>
+      <link>http://opslinux.com/2014/01/24/HTTP-Header-%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Fri, 24 Jan 2014 15:33:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/01/24/HTTP-Header-%E8%AF%A6%E8%A7%A3/</guid>
+      <description>HTTP（HyperTextTransferProtocol）即超文本传输协议，目前网页传输的的通用协议。HTTP协议采用了请求/响应模型，</description>
+    </item>
+    
+  </channel>
+</rss>

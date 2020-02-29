@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>celery on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/celery/</link>
+    <description>Recent content in celery on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 22 Sep 2015 09:28:23 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/celery/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>celery定时任务实践</title>
+      <link>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Tue, 22 Sep 2015 09:28:23 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</guid>
+      <description>说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下</description>
+    </item>
+    
+  </channel>
+</rss>
