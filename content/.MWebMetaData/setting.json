@@ -1,0 +1,10 @@
+{
+  "name" : "content",
+  "fileExtension" : ".md",
+  "autoUploadInsertedImageKey" : "sm.ms-https:\/\/sm.ms\/api\/upload",
+  "autoUploadInsertedImage" : false,
+  "folderType" : 10,
+  "mediaFloder" : "media",
+  "orderBy" : 0,
+  "newlinesToBR" : 0
+}
