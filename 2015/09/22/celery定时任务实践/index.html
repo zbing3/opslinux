@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>celery定时任务实践 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="celery定时任务实践" />
+<meta property="og:description" content="说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/" />
+<meta property="article:published_time" content="2015-09-22T09:28:23+00:00" />
+<meta property="article:modified_time" content="2015-09-22T09:28:23+00:00" />
+<meta itemprop="name" content="celery定时任务实践">
+<meta itemprop="description" content="说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下">
+<meta itemprop="datePublished" content="2015-09-22T09:28:23&#43;00:00" />
+<meta itemprop="dateModified" content="2015-09-22T09:28:23&#43;00:00" />
+<meta itemprop="wordCount" content="2546">
+
+
+
+<meta itemprop="keywords" content="celery,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="celery定时任务实践"/>
+<meta name="twitter:description" content="说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">celery定时任务实践</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2015-09-22 </span>
+        <div class="post-category">
+            <a href="/categories/Python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">安装</a></li>
+    <li><a href="#django">django设置</a></li>
+    <li><a href="#task">创建一个task</a></li>
+    <li><a href="#task-1">执行task</a></li>
+    <li><a href="#heading-1">启动</a></li>
+    <li><a href="#worker">启动worker</a></li>
+    <li><a href="#task-2">启动task</a></li>
+    <li><a href="#heading-2">定时任务</a>
+      <ul>
+        <li><a href="#beat">启动beat</a></li>
+        <li><a href="#heading-3">定时删除</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading-4">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/media/14428854039390.jpg" alt="">
+说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下想到了celery马上搞起来。</p>
+<p>看了资料做了需求分析，celery本身能完成队列和异步任务的功能，也有crontab但是如果做复杂的定时任务并不好控制，相对复杂。django-celery里面的定时任务功能可以通过后台控制，通过封装好的models也可以进行修改非常好。正好我们项目就是用的django所以直接django搞起来</p>
+<h2 id="heading">安装</h2>
+<p>安装不用多说直接pip就搞定, the我们使用的是github上的development版本，与相依赖的是<code>celery==3.1.18</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install git+https://github.com/celery/django-celery.git
+pip install celery==3.1.18 # 如果出现依赖问题那就安装
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="django">django设置</h2>
+<p>在settings.py中配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import djcelery
+djcelery.setup_loader()
+# BROKER_URL = &#39;django://&#39;  # 直接使用django做broker生产环境不建议，建议使用redis或者rabbitMQ
+BROKER_URL = &#39;redis://:auth@127.0.0.1:22222/0&#39; # broker使用reids
+CELERYBEAT_SCHEDULER = &#39;djcelery.schedulers.DatabaseScheduler&#39; # 定时任务
+CELERY_RESULT_BACKEND = &#39;djcelery.backends.database:DatabaseBackend&#39;
+CELERY_ENABLE_UTC = False # 不是用UTC
+CELERY_TIMEZONE = &#39;Asia/Shanghai&#39; 
+CELERY_TASK_RESULT_EXPIRES = 10 #任务结果的时效时间
+CELERYD_LOG_FILE = BASE_DIR + &#34;/logs/celery/celery.log&#34; # log路径
+CELERYBEAT_LOG_FILE = BASE_DIR + &#34;/logs/celery/beat.log&#34; # beat log路径
+CELERY_ACCEPT_CONTENT = [&#39;pickle&#39;, &#39;json&#39;, &#39;msgpack&#39;, &#39;yaml&#39;] # 允许的格式
+
+...
+INSTALLED_APPS = (
+  ...
+  &#39;djcelery&#39;,
+  &#39;kombu.transport.django&#39;,
+  ...
+)
+</code></pre></td></tr></table>
+</div>
+</div><p>第一二项是必须的，
+在INSTALLED_APPS中添加的djcelery是必须的. kombu.transport.django则是基于Django的broker，如果使用redis就不需要了。</p>
+<p>最后创建Celery所需的数据表(django1.8)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py migrate
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="task">创建一个task</h2>
+<p>正如前面所说的, 一个task就是一个Pyhton function. 但Celery需要知道这一function是task, 因此我们可以使用celery自带的装饰器decorator: @task. 在django app目录中创建taske.py:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">from celery import task
+
+@task()
+def add(x, y):
+   return x + y
+</code></pre></td></tr></table>
+</div>
+</div><p>当settings.py中的djcelery.setup_loader()运行时, Celery便会查看所有INSTALLED_APPS中app目录中的tasks.py文件, 找到标记为task的function, 并将它们注册为celery task.</p>
+<p>将function标注为task并不会妨碍他们的正常执行. 你还是可以像平时那样调用它: z = add(1, 2).</p>
+<h2 id="task-1">执行task</h2>
+<p>让我们以一个简单的例子作为开始. 例如我们希望在用户发出request后异步执行该task, 马上返回response, 从而不阻塞该request, 使用户有一个流畅的访问过程. 那么, 我们可以使用.delay, 例如在在views.py的一个view中:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">from myapp.tasks import add
+...
+   add.delay(2, 2)
+...
+</code></pre></td></tr></table>
+</div>
+</div><p>Celery会将task加入到queue中, 并马上返回. 而在一旁待命的worker看到该task后, 便会按照设定执行它, 并将他从queue中移除. 而worker则会执行以下代码:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import myapp.tasks.add
+
+myapp.tasks.add(2, 2)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="heading-1">启动</h2>
+<h2 id="worker">启动worker</h2>
+<p>正如之前说到的, 我们需要worker来执行task. 以下是在开发环境中的如何启动worker:</p>
+<p>首先启动terminal, 如同开发django项目一样, 激活virtualenv, 切换到django项目目录. 然后启动django自带web服务器: python manage.py runserver.</p>
+<p>然后启动worker:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    python manage.py celery worker --loglevel=info
+</code></pre></td></tr></table>
+</div>
+</div><p>此时, worker将会在该terminal中运行, 并显示输出结果.</p>
+<h2 id="task-2">启动task</h2>
+<p>打开新的terminal, 激活virtualenv, 并切换到django项目目录:</p>
+<pre><code>$ python manage.py shell
+&gt;&gt;&gt; from myapp.tasks import add
+&gt;&gt;&gt; add.delay(2, 2)
+</code></pre>
+<p>此时, 你可以在worker窗口中看到worker执行该task:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    [2014-10-07 08:47:08,076: INFO/MainProcess] Got task from broker: myapp.tasks.add[e080e047-b2a2-43a7-af74-d7d9d98b02fc]
+    [2014-10-07 08:47:08,299: INFO/MainProcess] Task myapp.tasks.add[e080e047-b2a2-43a7-af74-d7d9d98b02fc] succeeded in 0.183349132538s: 4
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="heading-2">定时任务</h2>
+<p>好了，简单的任务我们已经调通，下面我们还是来看定时任务怎么弄。
+首先新建一个文件task.py（名字可以随便取）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import datetime
+import json
+from djcelery import models as celery_models
+from django.utils import timezone
+
+def create_task(name, task, task_args, crontab_time):
+    &#39;&#39;&#39;
+    创建任务
+    name       # 任务名字
+    task       # 执行的任务 &#34;myapp.tasks.add&#34;
+    task_args  # 任务参数  {&#34;x&#34;:1, &#34;Y&#34;:1}
+    crontab_time # 定时任务时间 格式：
+	    {
+	      &#39;month_of_year&#39;: 9  # 月份
+	      &#39;day_of_month&#39;: 5   # 日期
+	      &#39;hour&#39;: 01         # 小时
+	      &#39;minute&#39;:05  # 分钟
+	    }
+    
+    &#39;&#39;&#39;
+    # task任务， created是否定时创建
+    task, created = celery_models.PeriodicTask.objects.get_or_create(
+        name=name,
+        task=task)
+   # 获取 crontab
+    crontab = celery_models.CrontabSchedule.objects.filter(
+        **crontab_time).first()
+    if crontab is None:
+    		# 如果没有就创建，有的话就继续复用之前的crontab
+        crontab = celery_models.CrontabSchedule.objects.create(
+            **crontab_time)
+    task.crontab = crontab # 设置crontab
+    task.enabled = True # 开启task
+    task.kwargs = json.dumps(task_args) # 传入task参数
+    expiration = timezone.now() + datetime.timedelta(day=1)
+    task.expires = expiration # 设置任务过期时间为现在时间的一天以后
+    task.save()
+    return True
+
+
+def disable_task(name):
+    &#39;&#39;&#39;
+    关闭任务
+    &#39;&#39;&#39;
+    try:
+        task = celery_models.PeriodicTask.objects.get(name=name)
+        task.enabled = False # 设置关闭
+        task.save()
+        return True
+    except celery_models.PeriodicTask.DoesNotExist:
+        return True
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="beat">启动beat</h3>
+<p>执行定时任务时, Celery会通过celerybeat进程来完成. Celerybeat会保持运行, 一旦到了某一定时任务需要执行时, Celerybeat便将其加入到queue中. 不像worker进程, Celerybeat只有需要一个即可.</p>
+<p>启动：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py celery beat --loglevel=info
+</code></pre></td></tr></table>
+</div>
+</div><p>其实还有一种简单的启动方式worker和beat一起启动：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    python manage.py celery worker --loglevel=info --beat
+</code></pre></td></tr></table>
+</div>
+</div><p>将定期任务储存在django数据库中. 即是在django和celery都运行的状态, 这一方式也可以让我们方便的修改定时任务. 我们只需要设置settings.py中的一项便能开启这一方式:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># settings.py
+CELERYBEAT_SCHEDULER = &#39;djcelery.schedulers.DatabaseScheduler&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>然后我们便可以通过django admin的/admin/djcelery/periodictask/添加定期任务了.
+也可以直接使用刚才我写的脚本在自己的代码逻辑中自己增加和禁用定时任务</p>
+<h3 id="heading-3">定时删除</h3>
+<p>可能大家用了一段时间就会想到，很多任务都是一次执行完就不需要，留在数据库里就是垃圾数据了有没有办法清除。方法肯定有因为django-celery本身就有定时任务功能我们加个任务就解决了。好我们看代码：
+在django app目录中打开taske.py加入如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">from djcelery import models as celery_models
+from django.utils import timezone
+
+@task()
+def delete():
+    &#39;&#39;&#39;
+    删除任务
+    从models中过滤出过期时间小于现在的时间然后删除
+    &#39;&#39;&#39;
+    return celery_models.PeriodicTask.objects.filter(
+        expires__lt=timezone.now()).delete()
+
+</code></pre></td></tr></table>
+</div>
+</div><p>大家都记得创建任务脚本里设置了 expires 1天以后过期，这样在filter的时候就能当做条件把过期的任务找到并且删除。</p>
+<p>然后我们在django-admin中把这个任务加到定时任务中：
+<img src="/media/14428906210406.jpg" alt="">
+名字为del，任务是myapp.taks.delete,定时为每天的5点执行（crontab的格式，不熟悉的大家可以搜索学习下linux crontab格式）</p>
+<h2 id="heading-4">参考</h2>
+<p><a href="http://www.weiguda.com/blog/73/">http://www.weiguda.com/blog/73/</a>
+<a href="http://my.oschina.net/kinegratii/blog/292395#OSC_h2_10">http://my.oschina.net/kinegratii/blog/292395#OSC_h2_10</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2015-09-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/celery/">celery</a>
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">一次Django和MariaDB中保存dateime毫秒数的斗争</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/">
+            <span class="next-text nav-default">python连接kafka</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

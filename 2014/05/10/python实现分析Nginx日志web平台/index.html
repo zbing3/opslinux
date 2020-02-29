@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python实现分析Nginx日志web平台 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2014/05/10/python%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90Nginx%E6%97%A5%E5%BF%97web%E5%B9%B3%E5%8F%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python实现分析Nginx日志web平台" />
+<meta property="og:description" content="其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2014/05/10/python%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90Nginx%E6%97%A5%E5%BF%97web%E5%B9%B3%E5%8F%B0/" />
+<meta property="article:published_time" content="2014-05-10T22:50:27+00:00" />
+<meta property="article:modified_time" content="2014-05-10T22:50:27+00:00" />
+<meta itemprop="name" content="python实现分析Nginx日志web平台">
+<meta itemprop="description" content="其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可">
+<meta itemprop="datePublished" content="2014-05-10T22:50:27&#43;00:00" />
+<meta itemprop="dateModified" content="2014-05-10T22:50:27&#43;00:00" />
+<meta itemprop="wordCount" content="848">
+
+
+
+<meta itemprop="keywords" content="python,nginx日志分析," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python实现分析Nginx日志web平台"/>
+<meta name="twitter:description" content="其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python实现分析Nginx日志web平台</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2014-05-10 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nginx">Nginx日志</a></li>
+    <li><a href="#nginx-1">Nginx日志分析处理</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可以偷偷回来看下，以便温习</p>
+<h2 id="nginx">Nginx日志</h2>
+<p>按日期切割log</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mv /var/log/nginx-server.access.log /var/log/nginx/nginx-server.access_$(date -d &#34;yesterday&#34; +&#34;%Y%m%
+d&#34;).log
+kill -USR1 `cat /etc/nginx/logs/nginx.pid`
+</code></pre></td></tr></table>
+</div>
+</div><p>首先要明确自己的Nginx的日志格式，找到配置文件如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">log_format  main  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;
+                  &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;
+                  &#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34; &#34;$request_time&#34; &#34;$upstream_response_time&#34;&#39;;
+</code></pre></td></tr></table>
+</div>
+</div><p>以上是我Nginx日志的格式</p>
+<h2 id="nginx-1">Nginx日志分析处理</h2>
+<p>啥也别说了 直接上代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#coding=utf-8
+import linecache
+import re
+import time,datetime
+import glob
+import os
+import conn
+w = &#39;&#39;&#39;112.224.65.85 - - [20/Aug/2013:00:01:02 +0800] &#34;POST /api/topic/comments HTTP/1.1&#34; 200 3804 &#34;-&#34; &#34;Corax/0.7.0 CFNetwork/609.1.4 Darwin/13.0.0&#34; &#34;-&#34; &#34;1.173&#34; &#34;0.005&#34;&#39;&#39;&#39;
+files_dir = &#34;/home/corax/ops/data/&#34;
+bak_dir = &#34;/home/corax/ops/data/backup&#34;
+
+def readfile(path):
+    filename = []
+    files = glob.glob(path + &#39;*.log&#39;)
+    return files
+
+def readtime(path):
+    read_time = []
+    files = glob.glob(path + &#39;*.log&#39;)
+    print files
+    for i in files:
+        read_time.append(i.split(&#39;_&#39;)[1].split(&#39;.&#39;)[0])
+    read_time = set(read_time)
+    return read_time
+
+def timestamp(time_file):
+    return time.mktime(time.strptime(time_file,&#39;%Y%b%d %H:%M:%S&#39;))
+
+def datestamp(date_name):
+    return time.strptime(date_name,&#39;%Y%b%d&#39;)
+
+def handle_log(log_file):
+    ip = r&#34;?P&lt;ip&gt;[\d.]*&#34;
+    date = r&#34;?P&lt;date&gt;\d+&#34;
+    month = r&#34;?P&lt;month&gt;\w+&#34;
+    year = r&#34;?P&lt;year&gt;\d+&#34;
+    log_time = r&#34;?P&lt;time&gt;\S+&#34;
+    method = r&#34;?P&lt;method&gt;\S+&#34;
+    request = r&#34;?P&lt;request&gt;\S+&#34;
+    status = r&#34;?P&lt;status&gt;\d+&#34;
+    bodyBytesSent = r&#34;?P&lt;bodyBytesSent&gt;\d+&#34;
+    refer = r&#34;&#34;&#34;?P&lt;refer&gt;
+             [^\&#34;]*
+             &#34;&#34;&#34;
+    userAgent=r&#34;&#34;&#34;?P&lt;userAgent&gt;
+                \S*
+               &#34;&#34;&#34;
+    forwardr=r&#34;&#34;&#34;?P&lt;forwardr&gt;
+                [^\&#34;]*
+               &#34;&#34;&#34;
+    request_time=r&#34;&#34;&#34;?P&lt;request_time&gt;
+                [^\&#34;]*
+               &#34;&#34;&#34;
+    response_time=r&#34;&#34;&#34;?P&lt;response_time&gt;
+                [^\&#34;]*
+               &#34;&#34;&#34;
+    p = re.compile(r&#34;(%s)\ -\ -\ \[(%s)/(%s)/(%s)\:(%s)\ [\S]+\]\ \&#34;(%s)?[\s]?(%s)?.*?\&#34;\ (%s)\ (%s)\ \&#34;(%s)\&#34;\ \&#34;(%s).*?\&#34;\ \&#34;(%s)\&#34;\ \&#34;(%s)\&#34;\ \&#34;(%s)\&#34;&#34; %(ip, date, month, year, log_time, method, request, status, bodyBytesSent, refer, userAgent, forwardr, request_time, response_time ), re.VERBOSE)
+
+    s = time.time()
+
+    log_list = []
+    for l in log_file:
+        f = open(l,&#39;r&#39;)
+        file_all = f.read()
+        m = re.findall(p,file_all)
+        for g in m:
+            time_all = &#39;%s%s%s %s&#39;%(g[3], g[2], g[1], g[4])
+            time_format = timestamp(time_all)
+            date = time.strftime(&#34;%Y%m%d&#34;,datestamp(&#39;%s%s%s&#39;%(g[3], g[2], g[1])))
+            hour = g[4].split(&#34;:&#34;)[0]
+            # print date,hour
+            if g[12] != &#34;-&#34;:
+                req_time = float(g[12])
+            else:
+                req_time = None
+            if g[13] != &#34;-&#34; and len(g[13])&lt;=5:
+                res_time = float(g[13])
+            else:
+                res_time =  None
+            log = {&#39;ip&#39;:g[0],&#39;time&#39;:time_format,&#39;method&#39;:g[5],&#39;request&#39;:g[6],&#39;status&#39;:g[7],&#39;bodyBytesSent&#39;:g[8],&#39;refer&#39;:g[9],&#39;userAgent&#39;:g[10],&#39;forwardr&#39;:g[11],&#39;request_time&#39;:req_time,&#39;response_time&#39;:res_time,&#39;date&#39;:int(date),&#39;hour&#39;:int(hour)}
+
+            conn.db.log.insert(log)
+        f.close()
+        print &#34;mv %s %s &#34;%(l,bak_dir)
+        os.system(&#34;mv %s %s &#34;%(l,bak_dir))
+    print time.time() - s
+
+if __name__ == &#39;__main__&#39;:
+    lf = readfile(files_dir)
+    print lf
+    read_time = readtime(files_dir)
+    print read_time
+    handle_log(lf)
+</code></pre></td></tr></table>
+</div>
+</div><p>我们书接上回，对上面的代码进行一下梳理：</p>
+<p>w变量存了一个测试的Nginx日志条目,readfile()函数是读取日志文件，然后返回文件的路径，readtime()函数是获取日期，handle_log()函数是分析日志的函数，对于每个日志段，用正则精心匹配筛选出来，然后就是入库。这里面试写入到了MongDB中。</p>
+<p>好了，日志都放到NOSQL当中了，接下来就是分析的问题，这个就是仁者见仁智者见智的事了，每个公司的需求不一样，有用redis分析的，有用zeromq分析，这就看大家的喜好了，分析完最后还是推荐大家用highcharts出图比较好看，这里推荐使用highcharts的文章：<a href="http://opslinux.com/python_and_highcharts-.html">highcharts使用</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2014-05-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">python</a>
+          <a href="/tags/nginx%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">nginx日志分析</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2014/05/12/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">算法的时间复杂度</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2014/05/07/Django-ajax-post/">
+            <span class="next-text nav-default">Django ajax post</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mechanize on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/mechanize/</link>
+    <description>Recent content in mechanize on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 14 May 2014 10:53:47 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/mechanize/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python使用mechanize实现登陆</title>
+      <link>http://opslinux.com/2014/05/14/python%E4%BD%BF%E7%94%A8mechanize%E5%AE%9E%E7%8E%B0%E7%99%BB%E9%99%86/</link>
+      <pubDate>Wed, 14 May 2014 10:53:47 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/14/python%E4%BD%BF%E7%94%A8mechanize%E5%AE%9E%E7%8E%B0%E7%99%BB%E9%99%86/</guid>
+      <description>mechanize是非常合适的模拟浏览器的模块，它的特点主要有： 1 http,https协议等。 2 简单的HTML表单填写。 3 浏览器历史记录和重</description>
+    </item>
+    
+  </channel>
+</rss>

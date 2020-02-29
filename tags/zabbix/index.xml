@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zabbix on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/zabbix/</link>
+    <description>Recent content in zabbix on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 09 Sep 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/zabbix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>zabbix监控mongoDB</title>
+      <link>http://opslinux.com/2013/09/09/zabbix%E7%9B%91%E6%8E%A7mongoDB/</link>
+      <pubDate>Mon, 09 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2013/09/09/zabbix%E7%9B%91%E6%8E%A7mongoDB/</guid>
+      <description>zabbix监控mongoDB 推荐文档： 官方推荐：http://docs.mongodb.org/manual/administration</description>
+    </item>
+    
+  </channel>
+</rss>

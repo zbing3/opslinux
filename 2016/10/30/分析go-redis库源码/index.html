@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>分析go-redis库源码 - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="项目地址：https://github.com/go-redis/redis 寻找入口 寻找入库，一般从 Quickstart 会给我们很多线索 1 2 3 4 5 6 7 8 9 10 11" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2016/10/30/%E5%88%86%E6%9E%90go-redis%E5%BA%93%E6%BA%90%E7%A0%81/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="分析go-redis库源码" />
+<meta property="og:description" content="项目地址：https://github.com/go-redis/redis 寻找入口 寻找入库，一般从 Quickstart 会给我们很多线索 1 2 3 4 5 6 7 8 9 10 11" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2016/10/30/%E5%88%86%E6%9E%90go-redis%E5%BA%93%E6%BA%90%E7%A0%81/" />
+<meta property="article:published_time" content="2016-10-30T08:43:42+00:00" />
+<meta property="article:modified_time" content="2016-10-30T08:43:42+00:00" />
+<meta itemprop="name" content="分析go-redis库源码">
+<meta itemprop="description" content="项目地址：https://github.com/go-redis/redis 寻找入口 寻找入库，一般从 Quickstart 会给我们很多线索 1 2 3 4 5 6 7 8 9 10 11">
+<meta itemprop="datePublished" content="2016-10-30T08:43:42&#43;00:00" />
+<meta itemprop="dateModified" content="2016-10-30T08:43:42&#43;00:00" />
+<meta itemprop="wordCount" content="2308">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="分析go-redis库源码"/>
+<meta name="twitter:description" content="项目地址：https://github.com/go-redis/redis 寻找入口 寻找入库，一般从 Quickstart 会给我们很多线索 1 2 3 4 5 6 7 8 9 10 11"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">分析go-redis库源码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-10-30 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>项目地址：https://github.com/go-redis/redis</p>
+<h1 id="heading">寻找入口</h1>
+<p>寻找入库，一般从 Quickstart 会给我们很多线索</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func ExampleNewClient() {
+    client := redis.NewClient(&amp;redis.Options{
+        Addr:     &#34;localhost:6379&#34;,
+        Password: &#34;&#34;, // no password set
+        DB:       0,  // use default DB
+    })
+
+    pong, err := client.Ping().Result()
+    fmt.Println(pong, err)
+    // Output: PONG &lt;nil&gt;
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>我们看到 创建client的时候调用 redis.NewClient 方法，我们不妨寻找一下这个函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/go-redis/redis.git
+
+$ cd redis
+
+$ grep -r -n &#34;NewClient&#34; *.go                                                                                                                                     [10:17:37]
+bench_test.go:12:	client := redis.NewClient(&amp;redis.Options{
+cluster.go:239:		Client: NewClient(opt),
+cluster_test.go:64:		client := redis.NewClient(&amp;redis.Options{
+command_test.go:14:		client = redis.NewClient(redisOptions())
+commands_test.go:19:		client = redis.NewClient(redisOptions())
+example_test.go:15:	client = redis.NewClient(&amp;redis.Options{
+example_test.go:26:func ExampleNewClient() {
+example_test.go:27:	client := redis.NewClient(&amp;redis.Options{
+iterator_test.go:47:		client = redis.NewClient(redisOptions())
+main_test.go:204:	client := redis.NewClient(&amp;redis.Options{
+pipeline_test.go:17:		client = redis.NewClient(redisOptions())
+pool_test.go:17:		client = redis.NewClient(redisOptions())
+pubsub_test.go:19:		client = redis.NewClient(redisOptions())
+race_test.go:23:		client = redis.NewClient(redisOptions())
+race_test.go:114:		client = redis.NewClient(redisOptions())
+race_test.go:175:			client := redis.NewClient(opt)
+race_test.go:198:			client := redis.NewClient(opt)
+redis.go:167:// NewClient returns a client to the Redis Server specified by Options.
+redis.go:168:func NewClient(opt *Options) *Client {
+redis_test.go:17:		client = redis.NewClient(redisOptions())
+redis_test.go:40:		custom := redis.NewClient(&amp;redis.Options{
+redis_test.go:109:		db2 := redis.NewClient(&amp;redis.Options{
+redis_test.go:141:		client = redis.NewClient(&amp;redis.Options{
+redis_test.go:195:		client = redis.NewClient(redisOptions())
+ring.go:157:		ring.addClient(name, NewClient(clopt))
+tx_test.go:17:		client = redis.NewClient(redisOptions())
+
+
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以看到 redis.go 的168行有 NewClient 函数的定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">redis.go:168:func NewClient(opt *Options) *Client {
+</code></pre></td></tr></table>
+</div>
+</div><p>这样我们找到了一个入口</p>
+<h1 id="heading-1">绘制项目地图</h1>
+<p>我们找查看一个项目，绘制这个项目的地图很重要</p>
+<p>通过 redis.go 168行我们可以看到，输入的参数 Options 和 返回值 Client
+<img src="media/14777950888230.jpg" alt=""></p>
+<p>我们看下 Optins 的定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">type Options struct {
+	Network string
+	Addr string
+	Dialer func() (net.Conn, error)
+	Password string
+	DB int
+	MaxRetries int
+	DialTimeout time.Duration
+	ReadTimeout time.Duration
+	WriteTimeout time.Duration
+	PoolSize int
+	PoolTimeout time.Duration
+	IdleTimeout time.Duration
+	IdleCheckFrequency time.Duration
+	ReadOnly bool
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>都是一些连接是用的参数，往下看有初始化函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func (opt *Options) init() {
+	if opt.Network == &#34;&#34; {
+		opt.Network = &#34;tcp&#34;
+	}
+	if opt.Dialer == nil {
+		opt.Dialer = func() (net.Conn, error) {
+			return net.DialTimeout(opt.Network, opt.Addr, opt.DialTimeout)
+		}
+	}
+	if opt.PoolSize == 0 {
+		opt.PoolSize = 10
+	}
+	if opt.DialTimeout == 0 {
+		opt.DialTimeout = 5 * time.Second
+	}
+	if opt.ReadTimeout == 0 {
+		opt.ReadTimeout = 3 * time.Second
+	}
+	if opt.WriteTimeout == 0 {
+		opt.WriteTimeout = opt.ReadTimeout
+	}
+	if opt.PoolTimeout == 0 {
+		opt.PoolTimeout = opt.ReadTimeout + time.Second
+	}
+	if opt.IdleTimeout == 0 {
+		opt.IdleTimeout = 5 * time.Minute
+	}
+	if opt.IdleCheckFrequency == 0 {
+		opt.IdleCheckFrequency = time.Minute
+	}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>对于参数提供了默认值</p>
+<p>然后我们看一下 Clinet 的定义， redis.go 151行 ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">type Client struct {
+	baseClient
+	cmdable
+}
+
+var _ Cmdable = (*Client)(nil)
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="media/14778013264082.jpg" alt=""></p>
+<p>Client 是由 baseClient 和 cmdable 组合而成。 从命名上来看 baseClient是保存一些基础不变的东西，cmdable可能是负责命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">var _ Cmdable = (*Client)(nil)
+</code></pre></td></tr></table>
+</div>
+</div><p>这行的意思 Client 要实现 Cmdable 这样的接口，要不然编译器会报错。 从 Client的结构上看只有 cmdble才能实现这样的一个接口</p>
+<p>我们看下 Cmdable 的源码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">type Cmdable interface {
+	Pipeline() *Pipeline
+	Pipelined(fn func(*Pipeline) error) ([]Cmder, error)
+
+	Echo(message interface{}) *StringCmd
+	Ping() *StatusCmd
+	Quit() *StatusCmd
+	Del(keys ...string) *IntCmd
+	Dump(key string) *StringCmd
+	Exists(key string) *BoolCmd
+	Expire(key string, expiration time.Duration) *BoolCmd
+	ExpireAt(key string, tm time.Time) *BoolCmd
+	Keys(pattern string) *StringSliceCmd
+	Migrate(host, port, key string, db int64, timeout time.Duration) *StatusCmd
+	Move(key string, db int64) *BoolCmd
+	ObjectRefCount(keys ...string) *IntCmd
+	ObjectEncoding(keys ...string) *StringCmd
+	ObjectIdleTime(keys ...string) *DurationCmd
+	Persist(key string) *BoolCmd
+	PExpire(key string, expiration time.Duration) *BoolCmd
+	PExpireAt(key string, tm time.Time) *BoolCmd
+	PTTL(key string) *DurationCmd
+	RandomKey() *StringCmd
+	Rename(key, newkey string) *StatusCmd
+	RenameNX(key, newkey string) *BoolCmd
+	Restore(key string, ttl time.Duration, value string) *StatusCmd
+	RestoreReplace(key string, ttl time.Duration, value string) *StatusCmd
+	Sort(key string, sort Sort) *StringSliceCmd
+	SortInterfaces(key string, sort Sort) *SliceCmd
+	TTL(key string) *DurationCmd
+	Type(key string) *StatusCmd
+	Scan(cursor uint64, match string, count int64) Scanner
+	SScan(key string, cursor uint64, match string, count int64) Scanner
+	HScan(key string, cursor uint64, match string, count int64) Scanner
+	ZScan(key string, cursor uint64, match string, count int64) Scanner
+	Append(key, value string) *IntCmd
+	BitCount(key string, bitCount *BitCount) *IntCmd
+	BitOpAnd(destKey string, keys ...string) *IntCmd
+	BitOpOr(destKey string, keys ...string) *IntCmd
+	BitOpXor(destKey string, keys ...string) *IntCmd
+	BitOpNot(destKey string, key string) *IntCmd
+	BitPos(key string, bit int64, pos ...int64) *IntCmd
+	Decr(key string) *IntCmd
+	DecrBy(key string, decrement int64) *IntCmd
+	Get(key string) *StringCmd
+	GetBit(key string, offset int64) *IntCmd
+	GetRange(key string, start, end int64) *StringCmd
+	GetSet(key string, value interface{}) *StringCmd
+	Incr(key string) *IntCmd
+	IncrBy(key string, value int64) *IntCmd
+	IncrByFloat(key string, value float64) *FloatCmd
+	MGet(keys ...string) *SliceCmd
+	MSet(pairs ...interface{}) *StatusCmd
+	MSetNX(pairs ...interface{}) *BoolCmd
+	Set(key string, value interface{}, expiration time.Duration) *StatusCmd
+	SetBit(key string, offset int64, value int) *IntCmd
+	SetNX(key string, value interface{}, expiration time.Duration) *BoolCmd
+	SetXX(key string, value interface{}, expiration time.Duration) *BoolCmd
+	SetRange(key string, offset int64, value string) *IntCmd
+	StrLen(key string) *IntCmd
+	HDel(key string, fields ...string) *IntCmd
+	HExists(key, field string) *BoolCmd
+	HGet(key, field string) *StringCmd
+	HGetAll(key string) *StringStringMapCmd
+	HIncrBy(key, field string, incr int64) *IntCmd
+	HIncrByFloat(key, field string, incr float64) *FloatCmd
+	HKeys(key string) *StringSliceCmd
+	HLen(key string) *IntCmd
+	HMGet(key string, fields ...string) *SliceCmd
+	HMSet(key string, fields map[string]string) *StatusCmd
+	HSet(key, field, value string) *BoolCmd
+	HSetNX(key, field, value string) *BoolCmd
+	HVals(key string) *StringSliceCmd
+	BLPop(timeout time.Duration, keys ...string) *StringSliceCmd
+	BRPop(timeout time.Duration, keys ...string) *StringSliceCmd
+	BRPopLPush(source, destination string, timeout time.Duration) *StringCmd
+	LIndex(key string, index int64) *StringCmd
+	LInsert(key, op string, pivot, value interface{}) *IntCmd
+	LInsertBefore(key string, pivot, value interface{}) *IntCmd
+	LInsertAfter(key string, pivot, value interface{}) *IntCmd
+	LLen(key string) *IntCmd
+	LPop(key string) *StringCmd
+	LPush(key string, values ...interface{}) *IntCmd
+	LPushX(key string, value interface{}) *IntCmd
+	LRange(key string, start, stop int64) *StringSliceCmd
+	LRem(key string, count int64, value interface{}) *IntCmd
+	LSet(key string, index int64, value interface{}) *StatusCmd
+	LTrim(key string, start, stop int64) *StatusCmd
+	RPop(key string) *StringCmd
+	RPopLPush(source, destination string) *StringCmd
+	RPush(key string, values ...interface{}) *IntCmd
+	RPushX(key string, value interface{}) *IntCmd
+	SAdd(key string, members ...interface{}) *IntCmd
+	SCard(key string) *IntCmd
+	SDiff(keys ...string) *StringSliceCmd
+	SDiffStore(destination string, keys ...string) *IntCmd
+	SInter(keys ...string) *StringSliceCmd
+	SInterStore(destination string, keys ...string) *IntCmd
+	SIsMember(key string, member interface{}) *BoolCmd
+	SMembers(key string) *StringSliceCmd
+	SMove(source, destination string, member interface{}) *BoolCmd
+	SPop(key string) *StringCmd
+	SPopN(key string, count int64) *StringSliceCmd
+	SRandMember(key string) *StringCmd
+	SRandMemberN(key string, count int64) *StringSliceCmd
+	SRem(key string, members ...interface{}) *IntCmd
+	SUnion(keys ...string) *StringSliceCmd
+	SUnionStore(destination string, keys ...string) *IntCmd
+	ZAdd(key string, members ...Z) *IntCmd
+	ZAddNX(key string, members ...Z) *IntCmd
+	ZAddXX(key string, members ...Z) *IntCmd
+	ZAddCh(key string, members ...Z) *IntCmd
+	ZAddNXCh(key string, members ...Z) *IntCmd
+	ZAddXXCh(key string, members ...Z) *IntCmd
+	ZIncr(key string, member Z) *FloatCmd
+	ZIncrNX(key string, member Z) *FloatCmd
+	ZIncrXX(key string, member Z) *FloatCmd
+	ZCard(key string) *IntCmd
+	ZCount(key, min, max string) *IntCmd
+	ZIncrBy(key string, increment float64, member string) *FloatCmd
+	ZInterStore(destination string, store ZStore, keys ...string) *IntCmd
+	ZRange(key string, start, stop int64) *StringSliceCmd
+	ZRangeWithScores(key string, start, stop int64) *ZSliceCmd
+	ZRangeByScore(key string, opt ZRangeBy) *StringSliceCmd
+	ZRangeByLex(key string, opt ZRangeBy) *StringSliceCmd
+	ZRangeByScoreWithScores(key string, opt ZRangeBy) *ZSliceCmd
+	ZRank(key, member string) *IntCmd
+	ZRem(key string, members ...interface{}) *IntCmd
+	ZRemRangeByRank(key string, start, stop int64) *IntCmd
+	ZRemRangeByScore(key, min, max string) *IntCmd
+	ZRevRange(key string, start, stop int64) *StringSliceCmd
+	ZRevRangeWithScores(key string, start, stop int64) *ZSliceCmd
+	ZRevRangeByScore(key string, opt ZRangeBy) *StringSliceCmd
+	ZRevRangeByLex(key string, opt ZRangeBy) *StringSliceCmd
+	ZRevRangeByScoreWithScores(key string, opt ZRangeBy) *ZSliceCmd
+	ZRevRank(key, member string) *IntCmd
+	ZScore(key, member string) *FloatCmd
+	ZUnionStore(dest string, store ZStore, keys ...string) *IntCmd
+	PFAdd(key string, els ...interface{}) *IntCmd
+	PFCount(keys ...string) *IntCmd
+	PFMerge(dest string, keys ...string) *StatusCmd
+	BgRewriteAOF() *StatusCmd
+	BgSave() *StatusCmd
+	ClientKill(ipPort string) *StatusCmd
+	ClientList() *StringCmd
+	ClientPause(dur time.Duration) *BoolCmd
+	ClientSetName(name string) *BoolCmd
+	ConfigGet(parameter string) *SliceCmd
+	ConfigResetStat() *StatusCmd
+	ConfigSet(parameter, value string) *StatusCmd
+	DbSize() *IntCmd
+	FlushAll() *StatusCmd
+	FlushDb() *StatusCmd
+	Info(section ...string) *StringCmd
+	LastSave() *IntCmd
+	Save() *StatusCmd
+	Shutdown() *StatusCmd
+	ShutdownSave() *StatusCmd
+	ShutdownNoSave() *StatusCmd
+	SlaveOf(host, port string) *StatusCmd
+	Time() *TimeCmd
+	Eval(script string, keys []string, args ...interface{}) *Cmd
+	EvalSha(sha1 string, keys []string, args ...interface{}) *Cmd
+	ScriptExists(scripts ...string) *BoolSliceCmd
+	ScriptFlush() *StatusCmd
+	ScriptKill() *StatusCmd
+	ScriptLoad(script string) *StringCmd
+	DebugObject(key string) *StringCmd
+	PubSubChannels(pattern string) *StringSliceCmd
+	PubSubNumSub(channels ...string) *StringIntMapCmd
+	PubSubNumPat() *IntCmd
+	ClusterSlots() *ClusterSlotsCmd
+	ClusterNodes() *StringCmd
+	ClusterMeet(host, port string) *StatusCmd
+	ClusterForget(nodeID string) *StatusCmd
+	ClusterReplicate(nodeID string) *StatusCmd
+	ClusterResetSoft() *StatusCmd
+	ClusterResetHard() *StatusCmd
+	ClusterInfo() *StringCmd
+	ClusterKeySlot(key string) *IntCmd
+	ClusterCountFailureReports(nodeID string) *IntCmd
+	ClusterCountKeysInSlot(slot int) *IntCmd
+	ClusterDelSlots(slots ...int) *StatusCmd
+	ClusterDelSlotsRange(min, max int) *StatusCmd
+	ClusterSaveConfig() *StatusCmd
+	ClusterSlaves(nodeID string) *StringSliceCmd
+	ClusterFailover() *StatusCmd
+	ClusterAddSlots(slots ...int) *StatusCmd
+	ClusterAddSlotsRange(min, max int) *StatusCmd
+	GeoAdd(key string, geoLocation ...*GeoLocation) *IntCmd
+	GeoPos(key string, members ...string) *GeoPosCmd
+	GeoRadius(key string, longitude, latitude float64, query *GeoRadiusQuery) *GeoLocationCmd
+	GeoRadiusByMember(key, member string, query *GeoRadiusQuery) *GeoLocationCmd
+	GeoDist(key string, member1, member2, unit string) *FloatCmd
+	GeoHash(key string, members ...string) *StringSliceCmd
+	Command() *CommandsInfoCmd
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>我们看到了 Cmdable 这个接口其实就是实现了 redis 命令的封装。</p>
+<p>我们接着看 baseClient</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">type baseClient struct {
+	connPool pool.Pooler
+	opt      *Options
+
+	onClose func() error // hook called when client is closed
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>baseClient 引用了连接池，</p>
+<p><img src="media/14778030546128.jpg" alt=""></p>
+<p>我们接着往下看 redis.go 这个文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func (c *baseClient) Process(cmd Cmder) error {
+	for i := 0; i &lt;= c.opt.MaxRetries; i++ {
+		if i &gt; 0 {
+			cmd.reset()
+		}
+
+		cn, _, err := c.conn()
+		if err != nil {
+			cmd.setErr(err)
+			return err
+		}
+
+		readTimeout := cmd.readTimeout()
+		if readTimeout != nil {
+			cn.ReadTimeout = *readTimeout
+		} else {
+			cn.ReadTimeout = c.opt.ReadTimeout
+		}
+		cn.WriteTimeout = c.opt.WriteTimeout
+
+		if err := writeCmd(cn, cmd); err != nil {
+			c.putConn(cn, err, false)
+			cmd.setErr(err)
+			if err != nil &amp;&amp; internal.IsRetryableError(err) {
+				continue
+			}
+			return err
+		}
+
+		err = cmd.readReply(cn)
+		c.putConn(cn, err, readTimeout != nil)
+		if err != nil &amp;&amp; internal.IsRetryableError(err) {
+			continue
+		}
+
+		return err
+	}
+
+	return cmd.Err()
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>发现 baseClient 有个 Process 方法 这个应该是处理执行的过程 需要我们注意。</p>
+<p><img src="media/14778049112136.jpg" alt=""></p>
+<p>根据广度优先原则，我们再看 Client 上还有什么关联的内容</p>
+<p>我们可以看到 redis.go 这个文件里面 还包含了 Pipeline 和 pubSub 两个函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func (c *Client) Pipeline() *Pipeline {
+}
+
+func (c *Client) pubSub() *PubSub {
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="media/14778093207234.jpg" alt=""></p>
+<p>然后我们再看下，项目文件，还有什么我们并没有涉及到的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> $ ls                                                                                                                     
+CHANGELOG.md   cluster_client_test.go  doc.go            main_test.go      pubsub.go       ring.go           tx.go
+LICENSE        cluster_test.go         example_test.go   options.go        pubsub_test.go  ring_test.go      tx_test.go
+Makefile       command.go              export_test.go    parser.go         race_test.go    script.go
+README.md      command_test.go         internal/         pipeline.go       redis.go        sentinel.go
+bench_test.go  commands.go             iterator.go       pipeline_test.go  redis_test.go   sentinel_test.go
+cluster.go     commands_test.go        iterator_test.go  pool_test.go      result.go       testdata/
+</code></pre></td></tr></table>
+</div>
+</div><p>答案就是 cluster，cluster 是连接 redis 集群的方式，会提供给用户使用</p>
+<p><img src="/media/14779019374152.jpg" alt=""></p>
+<p>我们详细看一下 cluster 源码，cluster 里面有自己的 Options，值得注意的是，有 Node 逻辑</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">type clusterNode struct {
+	Client  *Client
+	Latency time.Duration
+	loading time.Time
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>使用组合的方式把 Client 包装进来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/media/14779085735522.jpg" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2016-10-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/2016/11/18/0-%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">0.搭建环境</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2016/09/29/%E4%BD%BF%E7%94%A8-nginx-x-accel-redirect-%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/">
+            <span class="next-text nav-default">使用 nginx x-accell-redirect 保护你的静态文件</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

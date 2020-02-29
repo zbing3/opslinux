@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>zabbix监控mongoDB - 创e - 皓禹</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="皓禹" /><meta name="description" content="zabbix监控mongoDB 推荐文档： 官方推荐：http://docs.mongodb.org/manual/administration" /><meta name="keywords" content="Golang, Python, linux, 皓禹" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
+
+
+<link rel="canonical" href="http://opslinux.com/2013/09/09/zabbix%E7%9B%91%E6%8E%A7mongoDB/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="zabbix监控mongoDB" />
+<meta property="og:description" content="zabbix监控mongoDB 推荐文档： 官方推荐：http://docs.mongodb.org/manual/administration" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://opslinux.com/2013/09/09/zabbix%E7%9B%91%E6%8E%A7mongoDB/" />
+<meta property="article:published_time" content="2013-09-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-09-09T00:00:00+00:00" />
+<meta itemprop="name" content="zabbix监控mongoDB">
+<meta itemprop="description" content="zabbix监控mongoDB 推荐文档： 官方推荐：http://docs.mongodb.org/manual/administration">
+<meta itemprop="datePublished" content="2013-09-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2013-09-09T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="795">
+
+
+
+<meta itemprop="keywords" content="zabbix," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zabbix监控mongoDB"/>
+<meta name="twitter:description" content="zabbix监控mongoDB 推荐文档： 官方推荐：http://docs.mongodb.org/manual/administration"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">皓禹</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">皓禹</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">zabbix监控mongoDB</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2013-09-09 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="zabbixmongodb">zabbix监控mongoDB</h1>
+<p>推荐文档：</p>
+<p>官方推荐：http://docs.mongodb.org/manual/administration/monitoring/</p>
+<p>因我使用的是zabbix.所以选择：</p>
+<p><a href="https://code.google.com/p/mikoomi/wiki/03">https://code.google.com/p/mikoomi/wiki/03</a></p>
+<p>插件下载地址：</p>
+<p><a href="http://mikoomi.googlecode.com/svn/plugins/MongoDB%20Plugin/">http://mikoomi.googlecode.com/svn/plugins/MongoDB%20Plugin/</a></p>
+<p>学习地址：</p>
+<p><a href="https://blog.serverdensity.com/mongodb-monitoring-db-serverstatus/">https://blog.serverdensity.com/mongodb-monitoring-db-serverstatus/</a></p>
+<p><a href="http://www.yaukb.com/2012/05/zabbix_mongodb/">http://www.yaukb.com/2012/05/zabbix_mongodb/</a></p>
+<p><strong>1.在Zabbix Server上安装php MongoDB驱动：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost conf.d]# pecl install mongo
+
+WARNING: channel “pecl.php.net” has updated its protocols, use “pecl channel-update pecl.php.net” to update
+downloading mongo-1.4.3.tgz …
+Starting to download mongo-1.4.3.tgz (140,481 bytes)
+…………………………done: 140,481 bytes
+84 source files, building
+running: phpize
+Configuring for:
+PHP Api Version:         20100412
+Zend Module Api No:      20100525
+Zend Extension Api No:   220100525
+
+……
+
+Build process completed successfully
+Installing ‘/usr/lib64/php/modules/mongo.so’
+install ok: channel://pecl.php.net/mongo-1.4.3
+configuration option “php_ini” is not set to php.ini location
+You should add “extension=mongo.so” to php.ini
+You have new mail in /var/spool/mail/root
+
+[root@localhost conf.d]# vim /etc/php.ini
+
+[root@localhost conf.d]# /etc/init.d/httpd reload
+
+[root@localhost conf.d]# php -m |grep mongo
+
+mongo
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>2.下载：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost externalscripts]# pwd
+
+/etc/zabbix/externalscripts
+
+[root@localhost externalscripts]# wget http://mikoomi.googlecode.com/svn/plugins/MongoDB%20Plugin/mikoomi-mongodb-plugin.php
+
+[root@localhost externalscripts]# wget http://mikoomi.googlecode.com/svn/plugins/MongoDB%20Plugin/mikoomi-mongodb-plugin.sh
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3.导入模板 建立主机：</strong></p>
+<p>将<code>MongoDB_Plugin_template_export.xml</code>导入到zabbix中
+修改<code>&quot;Miscellaneous: Data Collector&quot;</code>监控项的key值，因默认提供的值有错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mikoomi-mongodb-plugin.sh[&#34;--&#34;, &#34;-h&#34;, &#34;{$MONGODB_HOSTNAME}&#34;, &#34;-p&#34;, &#34;{$MONGODB_PORT}&#34;, &#34;-z&#34;, &#34;{$MONGODB_ZABBIX_NAME}&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>在zabbix里建立主机，定义宏：</p>
+<p>{$MONGODB_HOSTNAME} = 10.0.199.30   #即ip地址</p>
+<p>{$MONGODB_PORT} = 27017 #监控mongdb的端口号</p>
+<p>{$MONGODB_ZABBIX_NAME} =MongDB1 #hostname 就是主机名 不要写显示名 这样会接受不到数据 一定是hostname</p>
+<p>然后给主机连接上模板即可。</p>
+<p><strong>4.测试：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost externalscripts]# ./mikoomi-mongodb-plugin.sh -D -h10.0.199.30 -p27017 -z MongDB1
+0
+[root@localhost externalscripts]# less /tmp/mikoomi-mongodb-plugin.php_MongoDB1.log
+
+mikoomi-mongodb-plugin.php:Successfully connected to mongoDB using connect string root:passworda@MongDB1:27017
+zabbix_sender [8413]: Warning: [line 66] ‘Key value’ required
+
+zabbix_sender [8413]: Warning: [line 68] ‘Key value’ required
+
+zabbix_sender [8414]: DEBUG: answer [{
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;    &amp;quot;response&amp;quot;:&amp;quot;success&amp;quot;,
+
+    &amp;quot;info&amp;quot;:&amp;quot;Processed 58 Failed 13 Total 71 Seconds spent 0.001618&amp;quot;}]
+&lt;/pre&gt;&lt;/div&gt;
+
+sent: 71; skipped: 2; total: 73
+
+/tmp/mikoomi-mongodb-plugin.php_MongDB1.log (END)
+</code></pre></td></tr></table>
+</div>
+</div><p><code>若出现  Failed 的数目和 Total数目相等的话 应该是  mikoomi-mongodb-plugin.sh 后面-z参数的 hostname没写对 这个hostname是zabbix主机的hostname即主机名 而不是显示名</code></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">皓禹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2013-09-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/zabbix/">zabbix</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2013/09/14/%E4%BD%BF%E7%94%A8Vagrant%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用Vagrant打造你的虚拟环境</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2013/07/13/%E4%BD%BF%E7%94%A8github%E5%92%8Cpelican%E6%90%AD%E5%BB%BA%E6%9C%AC%E7%AB%99%E5%8D%9A%E5%AE%A2/">
+            <span class="next-text nav-default">使用github和pelican搭建本站博客</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://opslinux.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">皓禹</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

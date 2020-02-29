@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django on 创e - 皓禹</title>
+    <link>http://opslinux.com/categories/Django/</link>
+    <description>Recent content in Django on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 23 Sep 2015 09:41:04 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/categories/Django/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一次Django和MariaDB中保存dateime毫秒数的斗争</title>
+      <link>http://opslinux.com/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/</link>
+      <pubDate>Wed, 23 Sep 2015 09:41:04 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/</guid>
+      <description>前段时间写私信项目，这种即时消息的系统肯定是存毫秒数的。本地环境是django1.8+mysql5.6一直这么开发屡试不爽，不料到测试线上环</description>
+    </item>
+    
+    <item>
+      <title>Django内存溢出</title>
+      <link>http://opslinux.com/2014/12/14/Django%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/</link>
+      <pubDate>Sun, 14 Dec 2014 21:43:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/12/14/Django%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/</guid>
+      <description>前两天工作需求，把python脚本从crontab的方式改成守护进程(daemon)，上线后发现，内存飙升，cpu飙高，程序直接死掉，让我伤</description>
+    </item>
+    
+    <item>
+      <title>Django使用两个以上mysql数据库</title>
+      <link>http://opslinux.com/2014/11/20/Django%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 20 Nov 2014 17:11:04 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/11/20/Django%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>看了Django的官方文档，关于model这有介绍Multiple databases，但是没有介绍超过两个数据库的连接情况，这里我用mysq</description>
+    </item>
+    
+    <item>
+      <title>Django错误日志在命令行显示</title>
+      <link>http://opslinux.com/2014/05/27/Django%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Tue, 27 May 2014 21:04:59 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/27/Django%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%BE%E7%A4%BA/</guid>
+      <description>最近项目传到服务器上测试，由于没开启log，有些错误没法判断，顾设置之，有此博文。 修改settings文件，添加如下代码： 1 2 3 4 5 6 7 8 9</description>
+    </item>
+    
+    <item>
+      <title>Django启动shell脚本</title>
+      <link>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Mon, 19 May 2014 15:11:45 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</guid>
+      <description>最近服务器在线上做测试，没用supervisord管理，有时候必须需要手动来回切换，dev和test启动的方式也不同，索性用shell写个比</description>
+    </item>
+    
+    <item>
+      <title>Django实现发送邮件重置用户密码</title>
+      <link>http://opslinux.com/2014/05/13/Django%E5%AE%9E%E7%8E%B0%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%87%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/</link>
+      <pubDate>Tue, 13 May 2014 10:47:19 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/13/Django%E5%AE%9E%E7%8E%B0%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E9%87%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/</guid>
+      <description>Django，是个不错的框架，非常全，内置了用户系统，咱们稍微修改就可以实现发送重置密码邮件。 url.py 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22</description>
+    </item>
+    
+    <item>
+      <title>Django ajax post</title>
+      <link>http://opslinux.com/2014/05/07/Django-ajax-post/</link>
+      <pubDate>Wed, 07 May 2014 20:35:03 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/07/Django-ajax-post/</guid>
+      <description>在web项目中，ajax运用非常频繁，今天就给大家展示下Django ajax Post的使用方法 templates 模板 index.html 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22</description>
+    </item>
+    
+    <item>
+      <title>Django自定义用户系统</title>
+      <link>http://opslinux.com/2014/04/20/Django%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sun, 20 Apr 2014 19:11:43 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/04/20/Django%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F/</guid>
+      <description>最近换了新公司，公司新项目要用Django，因为现在的领导对Django比较熟悉，对于我这种运维出身，对性能有着要求的人不能用tornado</description>
+    </item>
+    
+    <item>
+      <title>Test1</title>
+      <link>http://opslinux.com/2013/01/02/test/</link>
+      <pubDate>Wed, 02 Jan 2013 09:15:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2013/01/02/test/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

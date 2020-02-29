@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/Python/</link>
+    <description>Recent content in Python on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 19 May 2014 15:11:45 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/Python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django启动shell脚本</title>
+      <link>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Mon, 19 May 2014 15:11:45 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</guid>
+      <description>最近服务器在线上做测试，没用supervisord管理，有时候必须需要手动来回切换，dev和test启动的方式也不同，索性用shell写个比</description>
+    </item>
+    
+  </channel>
+</rss>

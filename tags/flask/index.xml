@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flask on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/flask/</link>
+    <description>Recent content in flask on 创e - 皓禹</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 16 May 2014 09:20:36 +0000</lastBuildDate>
+    
+	<atom:link href="http://opslinux.com/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>flask开发实践（一）</title>
+      <link>http://opslinux.com/2014/05/16/flask%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E4%B8%80/</link>
+      <pubDate>Fri, 16 May 2014 09:20:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/16/flask%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E4%B8%80/</guid>
+      <description>使用virtualenv 1 sudo pip install virtualenv 建议大家都使用python2.7以上版本 安装flask 1 pip install flask</description>
+    </item>
+    
+  </channel>
+</rss>
