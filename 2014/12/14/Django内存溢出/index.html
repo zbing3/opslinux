@@ -181,7 +181,25 @@
     </footer>
   </article>
         </div>
-        
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2014-12-14 21:43:36 \x2b0000 UTC',
+        title: 'Django内存溢出',
+        link: decodeURI(location.href),
+        desc: '前两天工作需求，把python脚本从crontab的方式改成守护进程(daemon)，上线后发现，内存飙升，cpu飙高，程序直接死掉，让我伤',
+        owner: 'zbing3',
+        repo: 'https:\/\/github.com\/zbing3\/opslinux.git',
+        oauth: {
+          client_id: '3116a0e287745a0cab0c',
+          client_secret: 'c8f407f81e137c981208b79011fe3785733a6297'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 
