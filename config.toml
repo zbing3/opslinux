@@ -138,14 +138,14 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
-    owner = "zbing3"              # Your GitHub ID
-    repo = "https://github.com/zbing3/opslinux.git"               # The repo to store comments
-    clientId = "3116a0e287745a0cab0c"           # Your client ID
-    clientSecret = "c8f407f81e137c981208b79011fe3785733a6297"       # Your client secret
-
-  [params.utterances]       # https://utteranc.es/
     owner = ""              # Your GitHub ID
     repo = ""               # The repo to store comments
+    clientId = ""           # Your client ID
+    clientSecret = ""       # Your client secret
+
+  [params.utterances]       # https://utteranc.es/
+    owner = "zbing3"              # Your GitHub ID
+    repo = "opslinux-comment"               # The repo to store comments
 
   [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
     owner = ""              # Your GitHub ID

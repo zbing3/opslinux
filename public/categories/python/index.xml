@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on 创e - 皓禹</title>
-    <link>http://opslinux.com/categories/python/</link>
-    <description>Recent content in python on 创e - 皓禹</description>
+    <title>Python on 创e - 皓禹</title>
+    <link>http://opslinux.com/categories/Python/</link>
+    <description>Recent content in Python on 创e - 皓禹</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 13 Dec 2016 11:42:21 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2015 09:28:23 +0000</lastBuildDate>
     
-	<atom:link href="http://opslinux.com/categories/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://opslinux.com/categories/Python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>python开发环境</title>
-      <link>http://opslinux.com/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Tue, 13 Dec 2016 11:42:21 +0000</pubDate>
+      <title>celery定时任务实践</title>
+      <link>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Tue, 22 Sep 2015 09:28:23 +0000</pubDate>
       
-      <guid>http://opslinux.com/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/</guid>
-      <description>docker 配置部分 拉取 alpine 1 $ alpine docker pull alpine 查看当前机 下的 docker 镜像 1 $ docker images 创建容器 1 $ docker create -ti --name python -h python -p 8080:8080 -w /root alpine sh 启动容器 1 $ docker start python 进入容器 1 $ docker attach python 停止容器 1</description>
+      <guid>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</guid>
+      <description>说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下</description>
     </item>
     
     <item>
-      <title>python开发环境</title>
-      <link>http://opslinux.com/2016/05/25/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%B7%A5%E4%BD%9C/</link>
-      <pubDate>Wed, 25 May 2016 14:05:18 +0000</pubDate>
+      <title>python连接kafka</title>
+      <link>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</link>
+      <pubDate>Tue, 14 Jul 2015 09:56:03 +0000</pubDate>
       
-      <guid>http://opslinux.com/2016/05/25/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%B7%A5%E4%BD%9C/</guid>
-      <description>操作系统：mac OSX 10.11 或 Ubuntu 16.04 编辑器： vim、 sublime、PyCharm python环境 版本： python3.5.1 安装工具 ###1. pyenv 安装 pyenv linux: 1 2 3 4 5 $ git clone git://github.com/yyuu/pyenv.git ~/.pyenv $ echo</description>
+      <guid>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</guid>
+      <description>最近项目中总是跟java配合，我一个写python的程序员，面对有复杂数据结构的java代码转换成python代码，确实是一大难题，有时候或</description>
+    </item>
+    
+    <item>
+      <title>Test1</title>
+      <link>http://opslinux.com/2013/01/02/test/</link>
+      <pubDate>Wed, 02 Jan 2013 09:15:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2013/01/02/test/</guid>
+      <description></description>
     </item>
     
   </channel>
