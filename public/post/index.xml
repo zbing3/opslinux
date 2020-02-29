@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 创e - 皓禹</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 19 May 2017 18:20:58 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 15:04:07 +0000</lastBuildDate>
     
 	<atom:link href="http://opslinux.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blog更新到hugo</title>
+      <link>http://opslinux.com/2020/02/29/blog%E6%9B%B4%E6%96%B0%E5%88%B0hugo/</link>
+      <pubDate>Sat, 29 Feb 2020 15:04:07 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2020/02/29/blog%E6%9B%B4%E6%96%B0%E5%88%B0hugo/</guid>
+      <description>其实好久没有更新博客了，但是这段时间并没有放弃和总结一些东西，只不过都是草草了事，也没做总结，不方便拿出来分享。一直在创业和输出的阶段，时间</description>
+    </item>
     
     <item>
       <title>你为什么学不好Python</title>
@@ -530,7 +539,7 @@
       <pubDate>Wed, 02 Jan 2013 09:15:36 +0000</pubDate>
       
       <guid>http://opslinux.com/2013/01/02/test/</guid>
-      <description></description>
+      <description>test</description>
     </item>
     
   </channel>
