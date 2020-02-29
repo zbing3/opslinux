@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hexo on 创e - 皓禹</title>
-    <link>http://opslinux.com/tags/Hexo/</link>
-    <description>Recent content in Hexo on 创e - 皓禹</description>
+    <title>Hugo on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/Hugo/</link>
+    <description>Recent content in Hugo on 创e - 皓禹</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 29 Feb 2020 15:04:07 +0000</lastBuildDate>
     
-	<atom:link href="http://opslinux.com/tags/Hexo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://opslinux.com/tags/Hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://opslinux.com/2020/02/29/blog%E6%9B%B4%E6%96%B0%E5%88%B0hugo/</guid>
       <description>其实好久没有更新博客了，但是这段时间并没有放弃和总结一些东西，只不过都是草草了事，也没做总结，不方便拿出来分享。一直在创业和输出的阶段，时间</description>
-    </item>
-    
-    <item>
-      <title>Test1</title>
-      <link>http://opslinux.com/2013/01/02/test/</link>
-      <pubDate>Wed, 02 Jan 2013 09:15:36 +0000</pubDate>
-      
-      <guid>http://opslinux.com/2013/01/02/test/</guid>
-      <description>test</description>
     </item>
     
   </channel>

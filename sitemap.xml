@@ -2,8 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://opslinux.com/categories/blog/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/tags/blog/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/2020/02/29/blog%E6%9B%B4%E6%96%B0%E5%88%B0hugo/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/categories/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/categories/Hexo/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/tags/Hexo/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/tags/Hugo/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/categories/Hugo/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://opslinux.com/post/</loc>
-    <lastmod>2017-05-19T18:20:58+00:00</lastmod>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/tags/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/</loc>
+    <lastmod>2020-02-29T15:04:07+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -16,29 +86,8 @@
   </url>
   
   <url>
-    <loc>http://opslinux.com/tags/</loc>
-    <lastmod>2017-05-19T18:20:58+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://opslinux.com/2017/05/19/%E4%BD%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E5%A5%BDPython/</loc>
     <lastmod>2017-05-19T18:20:58+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://opslinux.com/</loc>
-    <lastmod>2017-05-19T18:20:58+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://opslinux.com/categories/</loc>
-    <lastmod>2017-02-25T09:02:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -401,13 +450,6 @@
   </url>
   
   <url>
-    <loc>http://opslinux.com/tags/blog/</loc>
-    <lastmod>2014-05-16T09:20:36+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://opslinux.com/tags/flask/</loc>
     <lastmod>2014-05-16T09:20:36+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -718,20 +760,6 @@
   <url>
     <loc>http://opslinux.com/2013/07/12/links/</loc>
     <lastmod>2013-07-12T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://opslinux.com/tags/font/</loc>
-    <lastmod>2013-01-02T09:15:36+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://opslinux.com/tags/Hexo/</loc>
-    <lastmod>2013-01-02T09:15:36+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
