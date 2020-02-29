@@ -265,7 +265,25 @@ url_params 为URL中的参数
   </div>
 </article>
         </div>
-        
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '0001-01-01 00:00:00 \x2b0000 UTC',
+        title: '',
+        link: decodeURI(location.href),
+        desc: '[TOC]\n基本说明 params 为HTTP请求为GET时需要传的参数\ndata 为HTTP请求为POST\/PUT时需要传的参数\nheaders 为HTTP请求设置的header值\nurl_params 为URL中的参数\n域名 http:\/\/127.0.0.1\/backstage\n1. 用户登陆相关 1.1登陆接口 post \/login\n请求参数:\n1 2 3 4  data = { \x26#34;uid\x26#34;: \x26#34;\x26#34;, # 账号 \x26#34;password\x26#34;: \x26#34;\x26#34;, # 密码 }   返回结果:\n成功\n1 2 3 4  { \x26#34;status\x26#34;: 200, \x26#34;msg\x26#34;: \x26#34;success\x26#34; }   2.课程相关 get \/lesson\n请求参数:\n1 2 3  data = { }   返回结果:\n成功\n1 2 3 4 5 6 7 8 9 10 11 12 13  { \x26#34;data\x26#34;: [ { \x26#34;id\x26#34;: 1, \x26#34;name\x26#34;: \x26#34;计算机网络基础\x26#34;, \x26#34;description\x26#34;: \x26#34;计算机网络基础\x26#34;, \x26#34;cover_url\x26#34;: \x26#34;\x26#34;, \x26#34;status\x26#34;: 1 } ], \x26#34;status\x26#34;: 200, \x26#34;msg\x26#34;: \x26#34;success\x26#34; }   ',
+        owner: 'zbing3',
+        repo: 'https:\/\/github.com\/zbing3\/opslinux.git',
+        oauth: {
+          client_id: '3116a0e287745a0cab0c',
+          client_secret: 'c8f407f81e137c981208b79011fe3785733a6297'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 

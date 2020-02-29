@@ -196,7 +196,25 @@ c = &#39;abcd&#39;
     </footer>
   </article>
         </div>
-        
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2014-11-25 19:00:27 \x2b0000 UTC',
+        title: 'Python is的使用',
+        link: decodeURI(location.href),
+        desc: 'python is是种很特殊的语法，你在其它的语言应该不会见到这样的用法. python is主要是判断2个变量是否引用的是同一个对象，如果是的话，则返回True，否',
+        owner: 'zbing3',
+        repo: 'https:\/\/github.com\/zbing3\/opslinux.git',
+        oauth: {
+          client_id: '3116a0e287745a0cab0c',
+          client_secret: 'c8f407f81e137c981208b79011fe3785733a6297'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 

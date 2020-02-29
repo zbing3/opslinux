@@ -523,7 +523,25 @@ hello-world         latest              690ed74de00f        11 months ago       
     </footer>
   </article>
         </div>
-        
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2016-09-28 16:15:32 \x2b0000 UTC',
+        title: '使用docker搭建开发环境',
+        link: decodeURI(location.href),
+        desc: '现在开发环境原来越复杂，为了方便开发，让团队每个人的环境一致，最近使用docker进行打包image，发放给团队使用。 #安装docker 本人',
+        owner: 'zbing3',
+        repo: 'https:\/\/github.com\/zbing3\/opslinux.git',
+        oauth: {
+          client_id: '3116a0e287745a0cab0c',
+          client_secret: 'c8f407f81e137c981208b79011fe3785733a6297'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 
