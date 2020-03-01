@@ -16,18 +16,45 @@ categories: [blog, Hugo, Hexo]
 $ brew install hugo
 ```
 
-然后建立站点
+建立博客站点 安装以后，首先我们需要建立一个博客目录，下面存放的是博客的所有配置以及博文等资料，例如要建立一个名为 Blog 的站点，使用下面的命令
 
 ```bash
-hugo new site blog
+hugo new site Blog
 ```
+建立站点以后，博客根目录下默认有这些文件和子目录： `archetypes/` `config.toml` `content/` `data/` `layouts/` `static/` `themes/`
 
+config.toml 就是博客的配置文件，archetypes 目录下有一个 default.md，存放的是建立新博文时候默认使用的模板，可以根据自己需求修改。content 目录用来存放博文，static 可以存放一些自己的文件，themes 文件夹用于存放不同的主题。
+
+## 主题
 安装主题，我采用比较简单的 even 主题
 
+在博客根目录下，使用以下命令安装 even 主题：
 
 ```bash
-$ git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+git init
+git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even
 ```
+## 发文 
+
+使用如下命令创建测试博客，如果想要写新文章 也使用该命令，只不过把 test 改成自己想要的文件名即可： 
+
+```bash
+hugo new post/test.md
+```
+
+这样命令会在 Blog 下面的 content 下面的 post 里面就新建了 test.md 文件，并且里面包含了模板里预留的信息。
+
+
+## 预览
+本地启动博客查看效果。
+
+```
+hugo server 
+```
+
+使用 hugo server 命令，用浏览器打开 http://127.0.0.1:1313/ 就能看到自己博客的预览了
+
+
 
 ## 设置 Archetypes
 Archetypes，原型，其实也可以理解为模板。
@@ -47,15 +74,7 @@ categories: [Django, Python, Linux]
 
 ## 配置站点信息
 然后对于自己博客的信息和自己想对博客的一些自定义，可以编辑 config.toml 文件，hugo 提供了一些可配置功能。
-## 预览
-使用 hugo server 命令，用浏览器打开 http://127.0.0.1:1313/ 就能看到自己博客的预览了
-## 发文 
-如果想要写新文章 使用命令：
 
-```bash
-hugo new post/blog更新到hugo.md
-```
-这样在 blog 下面的 content 下面的 post 里面就新建了 blog更新到hugo.md 文件，并且里面包含了模板里预留的信息。
 # 迁移
 
 整体迁移起来比较简单，其实就是对 md 文件的 copy，然后遵循 hugo 解析 Front Matter 的方式就好。其实就是为了把原来 hexo 的格式改成 hugo 兼容的格式，如果文件比较多的话可以写一个脚本去修改。
@@ -75,7 +94,9 @@ zzzzz.md
 /2017/03/04/yyyyy
 /2017/05/06/zzzzz
 ```
+
 为了兼容这种格式我们编辑 config.toml 文件：
+
 ```toml
 [frontmatter]
 date = [":filename", ":default"]
@@ -175,7 +196,7 @@ git push origin gh-pages
 > 准备之后还要改下脚本，在进行 deploy 部署的时候，把博客程序自动备份到 master 上。
 
 # 参考
-
+* [迁移hexo博客到hugo](https://blog.eric7.site/2020/01/05/%E8%BF%81%E7%A7%BBhexo%E5%8D%9A%E5%AE%A2%E5%88%B0hugo/)
 * [https://blindwith.science/2019/08/447.html/](https://blindwith.science/2019/08/447.html/)
 * https://scarletsky.github.io/2019/05/02/migrate-hexo-to-hugo/
 * https://zhuanlan.zhihu.com/p/37752930
