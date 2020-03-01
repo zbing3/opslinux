@@ -1,23 +1,284 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on 创e - 皓禹</title>
-    <link>http://opslinux.com/tags/Python/</link>
-    <description>Recent content in Python on 创e - 皓禹</description>
+    <title>python on 创e - 皓禹</title>
+    <link>http://opslinux.com/tags/python/</link>
+    <description>Recent content in python on 创e - 皓禹</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 19 May 2014 15:11:45 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Dec 2016 11:42:21 +0000</lastBuildDate>
     
-	<atom:link href="http://opslinux.com/tags/Python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://opslinux.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Django启动shell脚本</title>
-      <link>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</link>
-      <pubDate>Mon, 19 May 2014 15:11:45 +0000</pubDate>
+      <title>python开发环境</title>
+      <link>http://opslinux.com/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Tue, 13 Dec 2016 11:42:21 +0000</pubDate>
       
-      <guid>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</guid>
-      <description>最近服务器在线上做测试，没用supervisord管理，有时候必须需要手动来回切换，dev和test启动的方式也不同，索性用shell写个比</description>
+      <guid>http://opslinux.com/2016/12/13/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%AD%A6%E4%B9%A0/</guid>
+      <description>docker 配置部分 拉取 alpine 1 $ alpine docker pull alpine 查看当前机 下的 docker 镜像 1 $ docker images 创建容器 1 $ docker create -ti --name python -h python -p 8080:8080 -w /root alpine sh 启动容器 1 $ docker start python 进入容器 1 $ docker attach python 停止容器 1</description>
+    </item>
+    
+    <item>
+      <title>使用 nginx x-accell-redirect 保护你的静态文件</title>
+      <link>http://opslinux.com/2016/09/29/%E4%BD%BF%E7%94%A8-nginx-x-accel-redirect-%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Thu, 29 Sep 2016 16:13:47 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2016/09/29/%E4%BD%BF%E7%94%A8-nginx-x-accel-redirect-%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/</guid>
+      <description>在web开发过程中，有些时候需要隐藏你的静态文件url，也有些时候需要频繁更替你的静态资源服务商，如果你的静态资源服务商（七牛、又拍云）发生</description>
+    </item>
+    
+    <item>
+      <title>使用docker搭建开发环境</title>
+      <link>http://opslinux.com/2016/09/28/%E4%BD%BF%E7%94%A8docker%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 28 Sep 2016 16:15:32 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2016/09/28/%E4%BD%BF%E7%94%A8docker%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>现在开发环境原来越复杂，为了方便开发，让团队每个人的环境一致，最近使用docker进行打包image，发放给团队使用。 #安装docker 本人</description>
+    </item>
+    
+    <item>
+      <title>python开发环境</title>
+      <link>http://opslinux.com/2016/05/25/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%B7%A5%E4%BD%9C/</link>
+      <pubDate>Wed, 25 May 2016 14:05:18 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2016/05/25/python%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-%E5%B7%A5%E4%BD%9C/</guid>
+      <description>操作系统：mac OSX 10.11 或 Ubuntu 16.04 编辑器： vim、 sublime、PyCharm python环境 版本： python3.5.1 安装工具 ###1. pyenv 安装 pyenv linux: 1 2 3 4 5 $ git clone git://github.com/yyuu/pyenv.git ~/.pyenv $ echo</description>
+    </item>
+    
+    <item>
+      <title>一次Django和MariaDB中保存dateime毫秒数的斗争</title>
+      <link>http://opslinux.com/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/</link>
+      <pubDate>Wed, 23 Sep 2015 09:41:04 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/</guid>
+      <description>前段时间写私信项目，这种即时消息的系统肯定是存毫秒数的。本地环境是django1.8+mysql5.6一直这么开发屡试不爽，不料到测试线上环</description>
+    </item>
+    
+    <item>
+      <title>celery定时任务实践</title>
+      <link>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Tue, 22 Sep 2015 09:28:23 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/09/22/celery%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</guid>
+      <description>说起celery搞python的程序员并不陌生，一般做队列任务之类的总是会用到。最近公司新项目用到类似队列的场景但是还要求定时完成，所以一下</description>
+    </item>
+    
+    <item>
+      <title>python连接kafka</title>
+      <link>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</link>
+      <pubDate>Tue, 14 Jul 2015 09:56:03 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/07/14/python%E8%BF%9E%E6%8E%A5kafka/</guid>
+      <description>最近项目中总是跟java配合，我一个写python的程序员，面对有复杂数据结构的java代码转换成python代码，确实是一大难题，有时候或</description>
+    </item>
+    
+    <item>
+      <title>python中验证ip的有效性正则</title>
+      <link>http://opslinux.com/2015/03/12/python%E4%B8%AD%E9%AA%8C%E8%AF%81ip%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7%E6%AD%A3%E5%88%99/</link>
+      <pubDate>Thu, 12 Mar 2015 19:57:30 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/03/12/python%E4%B8%AD%E9%AA%8C%E8%AF%81ip%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7%E6%AD%A3%E5%88%99/</guid>
+      <description>1 2 3 4 5 6 7 def _chk_ipaddr(ipaddr): IP_PATTERN = &amp;#39;^((0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5])\.){3}(0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5])$&amp;#39; if not ipaddr: return False ipcheck = re.compile(IP_PATTERN, re.I) return True if ipcheck.match(ipaddr) else False</description>
+    </item>
+    
+    <item>
+      <title>实现微信报警</title>
+      <link>http://opslinux.com/2015/02/15/%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6/</link>
+      <pubDate>Sun, 15 Feb 2015 10:39:45 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/02/15/%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6/</guid>
+      <description>最近公司业务上涨，报警频频发生，刚买的短信接口已经用一半了，这么下去肯定不是办法。现在都是移动互联网时代了，肯定得想点新办法，看着手机我想起</description>
+    </item>
+    
+    <item>
+      <title>python通过telnet连接华为设备</title>
+      <link>http://opslinux.com/2015/01/29/python%E9%80%9A%E8%BF%87telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Thu, 29 Jan 2015 17:40:07 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/01/29/python%E9%80%9A%E8%BF%87telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87/</guid>
+      <description>最近在研究华为防火墙，要搞个web版的程序来控制防火墙，那底层就需要用telnet或者snmp来控制设置，今天先共享下telnet的代码 1 2</description>
+    </item>
+    
+    <item>
+      <title>python开发实践(四)</title>
+      <link>http://opslinux.com/2015/01/27/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E5%9B%9B/</link>
+      <pubDate>Tue, 27 Jan 2015 17:59:13 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2015/01/27/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E5%9B%9B/</guid>
+      <description>在大家看到这门课程的时候，这个视频已经让我传到51cto的学院上了，之前一直用七牛云存储做视频存放，结果超过免费标准，收费了然后给我账号封了</description>
+    </item>
+    
+    <item>
+      <title>Django内存溢出</title>
+      <link>http://opslinux.com/2014/12/14/Django%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/</link>
+      <pubDate>Sun, 14 Dec 2014 21:43:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/12/14/Django%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/</guid>
+      <description>前两天工作需求，把python脚本从crontab的方式改成守护进程(daemon)，上线后发现，内存飙升，cpu飙高，程序直接死掉，让我伤</description>
+    </item>
+    
+    <item>
+      <title>Python对象类型转换json的方法</title>
+      <link>http://opslinux.com/2014/11/27/Python%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2json%E7%9A%84%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Thu, 27 Nov 2014 14:44:10 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/11/27/Python%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2json%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
+      <description>有时候，在Django的model中,直接查询出来的orm对象，想直接转成json会报错： 1 TypeError is not JSON serializable 1 2 3 4 5 6 7 8 def convert_to_builtin_type(obj): # print &amp;#39;default(&amp;#39;, repr(obj), &amp;#39;)&amp;#39; # Convert objects to</description>
+    </item>
+    
+    <item>
+      <title>python跳出多层循环</title>
+      <link>http://opslinux.com/2014/11/26/python%E8%B7%B3%E5%87%BA%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Wed, 26 Nov 2014 16:34:33 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/11/26/python%E8%B7%B3%E5%87%BA%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/</guid>
+      <description>今天同事问我一个python面试题，关于python跳出多层循环，原来还真没用过，网上一查还真有点意思，下面记录一下： Python 本身没有“break</description>
+    </item>
+    
+    <item>
+      <title>Python is的使用</title>
+      <link>http://opslinux.com/2014/11/25/Python-is%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 25 Nov 2014 19:00:27 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/11/25/Python-is%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>python is是种很特殊的语法，你在其它的语言应该不会见到这样的用法. python is主要是判断2个变量是否引用的是同一个对象，如果是的话，则返回True，否</description>
+    </item>
+    
+    <item>
+      <title>python开发实践(三)</title>
+      <link>http://opslinux.com/2014/06/16/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%B8%89/</link>
+      <pubDate>Mon, 16 Jun 2014 09:45:03 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/06/16/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%B8%89/</guid>
+      <description>共享你的代码 共享你的代码课程知识点： 编辑器 注释 命名空间 PyPi 上传 上传PyPi没有成功，因为nester这个模块名已经有了，大家可以更改下名字，再</description>
+    </item>
+    
+    <item>
+      <title>python开发实践(二)</title>
+      <link>http://opslinux.com/2014/05/28/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%BA%8C/</link>
+      <pubDate>Wed, 28 May 2014 21:12:18 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/28/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%BA%8C/</guid>
+      <description>人人都爱列表，把之前的坑填完，讲了函数和递归， 人人都爱列表课程知识点： if for 函数 递归 课后可看培强同学的笔记，写的非常棒，整理的比我好： 培强的笔</description>
+    </item>
+    
+    <item>
+      <title>Django错误日志在命令行显示</title>
+      <link>http://opslinux.com/2014/05/27/Django%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Tue, 27 May 2014 21:04:59 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/27/Django%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%BE%E7%A4%BA/</guid>
+      <description>最近项目传到服务器上测试，由于没开启log，有些错误没法判断，顾设置之，有此博文。 修改settings文件，添加如下代码： 1 2 3 4 5 6 7 8 9</description>
+    </item>
+    
+    <item>
+      <title>配置sublime打造python编辑器</title>
+      <link>http://opslinux.com/2014/05/26/%E9%85%8D%E7%BD%AEsublime%E6%89%93%E9%80%A0python%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+      <pubDate>Mon, 26 May 2014 09:46:24 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/26/%E9%85%8D%E7%BD%AEsublime%E6%89%93%E9%80%A0python%E7%BC%96%E8%BE%91%E5%99%A8/</guid>
+      <description>Contents 插件 Package Control SublimeCodeIntel插件 SublimeLinter Python PEP8 Autoformat GitGutter SideBarEnhancements 快捷键 昨晚长夜漫漫，无心睡眠，运维开发群里交谈不断，突然一位常用vim的同学想开速</description>
+    </item>
+    
+    <item>
+      <title>python开发实践(一)</title>
+      <link>http://opslinux.com/2014/05/25/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%B8%80/</link>
+      <pubDate>Sun, 25 May 2014 22:17:06 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/25/python%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E4%B8%80/</guid>
+      <description>今天更新了python开发实践的第一课，人人都爱列表（一），由于事件匆忙，录制水平没达到理想效果，请大家见谅。第一课还是比较简单的。在这里补</description>
+    </item>
+    
+    <item>
+      <title>python视频动员</title>
+      <link>http://opslinux.com/2014/05/22/python%E8%A7%86%E9%A2%91%E5%8A%A8%E5%91%98/</link>
+      <pubDate>Thu, 22 May 2014 07:25:36 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/22/python%E8%A7%86%E9%A2%91%E5%8A%A8%E5%91%98/</guid>
+      <description>python现在变得越来越流行，所以有更多朋友想学习python，有些朋友没有编程基础，买了书看不进去不知道如何下手，报了培训班，讲师良莠不</description>
+    </item>
+    
+    <item>
+      <title>安装ipython</title>
+      <link>http://opslinux.com/2014/05/18/%E5%AE%89%E8%A3%85ipython/</link>
+      <pubDate>Sun, 18 May 2014 10:11:24 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/18/%E5%AE%89%E8%A3%85ipython/</guid>
+      <description>今天看到有朋友在用ipython，我也好久没用了，索性装一下 环境为MacOS Python 2.7.5 1 pip install readline ipython 安装完成，输入ipython进入：</description>
+    </item>
+    
+    <item>
+      <title>python实现分析Nginx日志web平台</title>
+      <link>http://opslinux.com/2014/05/10/python%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90Nginx%E6%97%A5%E5%BF%97web%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Sat, 10 May 2014 22:50:27 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/10/python%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90Nginx%E6%97%A5%E5%BF%97web%E5%B9%B3%E5%8F%B0/</guid>
+      <description>其实项目写完好久了，一直没时间总结，正好最近离职，也不是特别忙把一些自己认为使用的项目分享一下给大家，希望能帮助到大家，即使帮助不到，我还可</description>
+    </item>
+    
+    <item>
+      <title>python和highcharts制作图表</title>
+      <link>http://opslinux.com/2014/05/06/python%E5%92%8Chighcharts%E5%88%B6%E4%BD%9C%E5%9B%BE%E8%A1%A8/</link>
+      <pubDate>Tue, 06 May 2014 19:44:34 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/06/python%E5%92%8Chighcharts%E5%88%B6%E4%BD%9C%E5%9B%BE%E8%A1%A8/</guid>
+      <description>有时候我们需要制作一些图表，单独使用python可以制作出但是不是特别好看，今天我们就用Django和highcharts神器来做出好看的图</description>
+    </item>
+    
+    <item>
+      <title>python计算文件md5</title>
+      <link>http://opslinux.com/2014/05/04/python%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6md5/</link>
+      <pubDate>Sun, 04 May 2014 16:05:23 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/05/04/python%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6md5/</guid>
+      <description>Python中，用于加密的md5方法在hashlib模块中，文件的MD5校验码是根据文件的内容生成的信息摘要，方法如下: 1 2 3 4 5 6 7 8 9 10</description>
+    </item>
+    
+    <item>
+      <title>Django自定义用户系统</title>
+      <link>http://opslinux.com/2014/04/20/Django%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sun, 20 Apr 2014 19:11:43 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/04/20/Django%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F/</guid>
+      <description>最近换了新公司，公司新项目要用Django，因为现在的领导对Django比较熟悉，对于我这种运维出身，对性能有着要求的人不能用tornado</description>
+    </item>
+    
+    <item>
+      <title>python实现控制Mplayer</title>
+      <link>http://opslinux.com/2014/03/26/python%E5%AE%9E%E7%8E%B0%E6%8E%A7%E5%88%B6Mplayer/</link>
+      <pubDate>Wed, 26 Mar 2014 16:39:11 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/03/26/python%E5%AE%9E%E7%8E%B0%E6%8E%A7%E5%88%B6Mplayer/</guid>
+      <description>今天有这么一个需求，让用python来控制MPlayer，实现一个简单的web，功能有：暂停，播放，快进，快退，显示播放list，进度，显示</description>
+    </item>
+    
+    <item>
+      <title>sqlalchemy查询返回json数据</title>
+      <link>http://opslinux.com/2014/02/19/sqlalchemy%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9Ejson%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 19 Feb 2014 11:17:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2014/02/19/sqlalchemy%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9Ejson%E6%95%B0%E6%8D%AE/</guid>
+      <description>最近公司开发新项目使用tornado+mysql，传统的SQL开发方式大家都感觉不爽（其实我不太会，哈哈），所以开始使用orm方式，这也是p</description>
+    </item>
+    
+    <item>
+      <title>python中的urlencode与urldecode</title>
+      <link>http://opslinux.com/2013/11/01/python%E4%B8%AD%E7%9A%84urlencode%E4%B8%8Eurldecode/</link>
+      <pubDate>Fri, 01 Nov 2013 12:51:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2013/11/01/python%E4%B8%AD%E7%9A%84urlencode%E4%B8%8Eurldecode/</guid>
+      <description>转载： 地址. 概要：python 通过 HTTP 交互处理数据的时候，url 里面的中文以及特殊字符要做处理的，来学习一下 urlencode 与 urldecode 之间相互转换的方法。 当url</description>
+    </item>
+    
+    <item>
+      <title>Python多版本共存之pyenv</title>
+      <link>http://opslinux.com/2013/10/04/Python%E5%A4%9A%E7%89%88%E6%9C%AC%E5%85%B1%E5%AD%98%E4%B9%8Bpyenv/</link>
+      <pubDate>Fri, 04 Oct 2013 00:27:00 +0000</pubDate>
+      
+      <guid>http://opslinux.com/2013/10/04/Python%E5%A4%9A%E7%89%88%E6%9C%AC%E5%85%B1%E5%AD%98%E4%B9%8Bpyenv/</guid>
+      <description>需要使用新版本Python的相关功能，但是又不想要影响到系统自带的Python，这个时候就需要实现Python的多版本共存。 pyenv可以很</description>
     </item>
     
   </channel>

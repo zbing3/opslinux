@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>http://opslinux.com/tags/Hugo/</loc>
+    <loc>http://opslinux.com/categories/Hugo/</loc>
     <lastmod>2020-02-29T15:04:07+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://opslinux.com/categories/Hugo/</loc>
+    <loc>http://opslinux.com/tags/Hugo/</loc>
     <lastmod>2020-02-29T15:04:07+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -115,6 +115,13 @@
   
   <url>
     <loc>http://opslinux.com/categories/python/</loc>
+    <lastmod>2016-12-13T11:42:21+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://opslinux.com/tags/python/</loc>
     <lastmod>2016-12-13T11:42:21+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -226,6 +233,13 @@
   </url>
   
   <url>
+    <loc>http://opslinux.com/tags/django/</loc>
+    <lastmod>2015-09-23T09:41:04+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://opslinux.com/2015/09/23/django%E4%B8%ADdatetime%E5%85%A5%E5%BA%93%E4%BF%9D%E5%AD%98%E6%AF%AB%E7%A7%92%E6%95%B0/</loc>
     <lastmod>2015-09-23T09:41:04+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -317,13 +331,6 @@
   </url>
   
   <url>
-    <loc>http://opslinux.com/tags/Django/</loc>
-    <lastmod>2014-11-20T17:11:04+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://opslinux.com/2014/11/20/Django%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2014-11-20T17:11:04+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -409,13 +416,6 @@
   
   <url>
     <loc>http://opslinux.com/2014/05/19/Django%E5%90%AF%E5%8A%A8shell%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2014-05-19T15:11:45+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://opslinux.com/tags/Python/</loc>
     <lastmod>2014-05-19T15:11:45+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
